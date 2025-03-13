@@ -22,9 +22,11 @@ Processes and codes for various practice sessions will be shared here. Please no
 **TA:** Na Yeon Kim ([email](mailto:nayeonkim1@snu.ac.kr))
 
 ### Session 5 - EHR
+**Date:** TBA   
 **TA:** Junhyeong Lee ([email](mailto:lrainsoul@snu.ac.kr))
 
 ### Session 6 - Medical Image Analysis  (HW)
+**Date:** TBA   
 **TA:** Wonyoung Jang ([email](mailto:jwy4888@snu.ac.kr))
 
 *For more details on each session, please refer to the specific folder within this repository.*
