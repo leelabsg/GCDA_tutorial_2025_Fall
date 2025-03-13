@@ -1,24 +1,24 @@
-# GCDA_Tutorial_2024
+# GCDA_Tutorial_2025
 
-This repository is for the Genomic & Clinical Data Analysis course for the Fall 2024 semester. 
+This repository is for the Genomic & Clinical Data Analysis course for the Spring 2025 semester. 
 
 Processes and codes for various practice sessions will be shared here. Please note, the schedule is subject to change.
 
 ## Practice Session List
 ### [Session 1 - Sequencing Pipeline](Session1_Sequencing.md)
-**Date:** October 1, 2024  
+**Date:** March 20, 2025  
 **TA:** Seokho Jeong ([email](mailto:seokho92@snu.ac.kr))
 
 ### [Session 2 - GWAS](Session2_GWAS.md)
-**Date:** October 15, 2024  
+**Date:** TBA  
 **TA:** Kisung Nam ([email](mailto:kisung.nam@snu.ac.kr))
 
 ### [Session 3 - Mendelian Randomization](Session3_Mendelian_Randomization.Md)
-**Date:** November 5, 2024  
+**Date:** TBA 
 **TA:** Chang Hoon Kang ([email](mailto:chkang96@snu.ac.kr))
 
 ### [Session 4 - PRS](Session4_PRS.md)
-**Date:** November 12, 2024  
+**Date:** TBA 
 **TA:** Na Yeon Kim ([email](mailto:nayeonkim1@snu.ac.kr))
 
 ### Session 5 - EHR
