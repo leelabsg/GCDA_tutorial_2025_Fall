@@ -22,9 +22,10 @@ bash Anaconda3-2022.10-Linux-x86_64.sh
 ```
 ### Access Leelab computational server via personal account
 To access to leelab computational server, you can use ssh command from any command shell, or vscode
+Your ID is gcda<xxx>, last three digits of student ID
 ```
-ssh gcda<last 3 digits of student id>@147.47.200.131 -p 22555
-ID: gcda<last 3 digits of student id>
+ssh gcda<xxx>@147.47.200.131 -p 22555
+ID: gcda<xxx>
 
 ```
 
