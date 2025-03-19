@@ -11,15 +11,10 @@ wsl --install
 ```
 After system restart, linux can be run from terminal app. (Note that hard drive is mounted under /mnt)
 
-```
+find latest release for Linux-x86 and copy link from https://www.anaconda.com/products/distribution
 
-# find latest release for Linux-x86 and copy link from https://www.anaconda.com/products/distribution
-wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+install anaconda by following instructions
 
-# install anaconda by running bash and follow instructions
-bash Anaconda3-2022.10-Linux-x86_64.sh
-
-```
 ### Access Leelab computational server via personal account
 To access to leelab computational server, you can use ssh command from any command shell, or vscode
 Your ID is gcda<xxx>, last three digits of student ID
