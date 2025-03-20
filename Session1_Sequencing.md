@@ -17,10 +17,11 @@ install anaconda by following instructions
 
 ### Access Leelab computational server via personal account
 To access to leelab computational server, you can use ssh command from any command shell, or vscode
-Your ID is gcda<xxx>, last three digits of student ID
+Your ID is gcda_<xxx>, last three digits of student ID
 ```
 ssh gcda_<xxx>@147.47.200.131 -p 22555
 ID: gcda_<xxx>
+PW (default): gcda_<xxx>
 
 ```
 
@@ -36,8 +37,8 @@ conda create -n SEQ samtools bwa -c anaconda -c bioconda
 conda activate SEQ
 
 # Install jdk 17 version (Required after picard 3.0.0)
-wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
-tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
+## wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+tar xvf ~/GCDA/1_sequencing/utils/openjdk-17.0.2_linux-x64_bin.tar.gz
 export JAVA_HOME=$JAVA_HOME/:~/jdk-17.0.2/
 export PATH=$JAVA_HOME/bin:$PATH
 alias java17="~/jdk-17.0.2/bin/java"
@@ -45,8 +46,8 @@ alias java17="~/jdk-17.0.2/bin/java"
 # install gatk4 
 conda install gatk4 -c bioconda
 # Download Picard (Find Latest Release: https://github.com/broadinstitute/picard/releases/latest)
-cd ~/GCDA/1_sequencing/utils
-wget https://github.com/broadinstitute/picard/releases/download/3.0.0/picard.jar
+## cd ~/GCDA/1_sequencing/utils
+## wget https://github.com/broadinstitute/picard/releases/download/3.0.0/picard.jar
 
 ```
 
@@ -60,12 +61,12 @@ You can browse [FTP server](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/) of 1000 G
 mkdir -p ~/GCDA/1_sequencing/reference
 cd ~/GCDA/1_sequencing/reference
 # Download 1000 Genome reference panel
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz
-gzip -d human_g1k_v37.fasta.gz
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz
+## gzip -d human_g1k_v37.fasta.gz
 
 # Download VCF file and its index (tbi) file for known variants
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/integrated_sv_map/ALL.wgs.mergedSV.v8.20130502.svs.genotypes.vcf.gz
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/integrated_sv_map/ALL.wgs.mergedSV.v8.20130502.svs.genotypes.vcf.gz.tbi
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/integrated_sv_map/ALL.wgs.mergedSV.v8.20130502.svs.genotypes.vcf.gz
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/integrated_sv_map/ALL.wgs.mergedSV.v8.20130502.svs.genotypes.vcf.gz.tbi
 ```
 
 You can check the contents of the `FASTA` file by the following command:
@@ -94,14 +95,14 @@ This can be downloaded from ftp server wih project description : [1000 Genome Pr
 cd ~/GCDA/1_sequencing/raw_reads
 # Download sequence read file from 1000 Genome
 # sample HG00096
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062634.filt.fastq.gz
-gzip -d SRR062634.filt.fastq.gz
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/sequence_read/SRR062634.filt.fastq.gz
+## gzip -d SRR062634.filt.fastq.gz
 # sample HG00097
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00097/sequence_read/SRR741384.filt.fastq.gz
-gzip -d SRR741384.filt.fastq.gz
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00097/sequence_read/SRR741384.filt.fastq.gz
+## gzip -d SRR741384.filt.fastq.gz
 # sample HG00099
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00099/sequence_read/SRR741411.filt.fastq.gz
-gzip -d SRR741411.filt.fastq.gz
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00099/sequence_read/SRR741411.filt.fastq.gz
+## gzip -d SRR741411.filt.fastq.gz
 ```
 
 We can check the contents of the `FASTQ` file by `head` command, and you will see the following:
