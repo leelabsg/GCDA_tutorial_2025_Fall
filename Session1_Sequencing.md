@@ -418,4 +418,5 @@ DeepVariant is a deep learning-based variant caller that takes aligned reads (in
 The simple concept of Deepvariant is explained and visualized in following post:
 [Looking Through DeepVariant's Eyes](https://google.github.io/deepvariant/posts/2020-02-20-looking-through-deepvariants-eyes/)
 
-### 9. [Geneformer](https://github.com/jkobject/geneformer)
+### 9. [Geneformer](https://github.com/jkobject/geneformer) & [Enformer](https://github.com/lucidrains/enformer-pytorch)
+Gene Expression prediction models or single-cell resolution foundation model via transformer.
