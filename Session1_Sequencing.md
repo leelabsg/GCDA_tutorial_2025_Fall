@@ -24,6 +24,11 @@ ID: gcda_<xxx>
 PW (default): gcda_<xxx>
 
 ```
+### Use designated node for computation: leelabsg15
+After login, use ssh to log on to designated node for GCDA 2025 Spring
+```
+ssh leelabsg15
+```
 
 ### 1. Setting up the environment
 
@@ -86,7 +91,7 @@ samtools faidx human_g1k_v37.fasta
 gatk CreateSequenceDictionary -R human_g1k_v37.fasta
 
 # Construct files with Burrows-Wheeler Transformation (5 files)
-bwa index -a bwtsw human_g1k_v37.fasta
+## bwa index -a bwtsw human_g1k_v37.fasta
 ```
 
 And we need a sequence read file (`FASTQ`) for the sample individual (HG00096).
@@ -163,13 +168,14 @@ This practice session consists of 4 steps.
 4) Convert `GVCF` to `VCF`
  * `GenotypeGVCFs`
 
-### 4. (Optional) Preprocessing the `FASTQ` file
+### 4. Preprocessing the `FASTQ` file
 
 #### Convert the raw `FASTQ` file to an unmapped `BAM` file
 
 Using `FastqToSam` function of Picard, we can convert the `FASTQ` file to an unmapped `BAM` file.
 
 ```
+mkdir -p ~/GCDA/1_sequencing/data/
 SID=HG00096
 java17 -jar ~/GCDA/1_sequencing/utils/picard.jar FastqToSam \
 F1=~/GCDA/1_sequencing/raw_reads/SRR062634.filt.fastq \
@@ -309,6 +315,14 @@ gatk --java-options '-Xmx10g' ApplyBQSR \
 --bqsr-recal-file recal_data_${SID}.table \
 -O bqsr_${SID}.bam
 ```
+#### Convert other samples into processed bam
+```
+for SID in HG00096 HG00097 HG00098
+do
+bash ~/GCDA/1_sequencing/bam_proc.sh ${SID}
+done
+```
+
 
 #### IGV Viewer (Software for visualization of `BAM` file)
 
@@ -317,12 +331,12 @@ We can visualize the aligned `BAM` file with the [IGV viewer](https://software.b
 For example, we can observe high coverage around SUMO1P1 gene. (`HG00096.chrom20.ILLUMINA.bwa.GBR.exome.20120522.bam`)
 ```
 cd ~/GCDA/1_sequencing/raw_reads
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/exome_alignment/HG00096.chrom20.ILLUMINA.bwa.GBR.exome.20120522.bam
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/exome_alignment/HG00096.chrom20.ILLUMINA.bwa.GBR.exome.20120522.bam.bai
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00097/exome_alignment/HG00097.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00097/exome_alignment/HG00097.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam.bai
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00099/exome_alignment/HG00099.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00099/exome_alignment/HG00099.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam.bai
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/exome_alignment/HG00096.chrom20.ILLUMINA.bwa.GBR.exome.20120522.bam
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/exome_alignment/HG00096.chrom20.ILLUMINA.bwa.GBR.exome.20120522.bam.bai
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00097/exome_alignment/HG00097.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00097/exome_alignment/HG00097.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam.bai
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00099/exome_alignment/HG00099.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam
+## wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00099/exome_alignment/HG00099.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam.bai
 ```
 
 ### 6. Converting `BAM` to `GVCF`
