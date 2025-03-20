@@ -19,8 +19,8 @@ install anaconda by following instructions
 To access to leelab computational server, you can use ssh command from any command shell, or vscode
 Your ID is gcda<xxx>, last three digits of student ID
 ```
-ssh gcda<xxx>@147.47.200.131 -p 22555
-ID: gcda<xxx>
+ssh gcda_<xxx>@147.47.200.131 -p 22555
+ID: gcda_<xxx>
 
 ```
 
