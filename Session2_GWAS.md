@@ -1,17 +1,17 @@
-# Practice Session #2: Genome-wide Association Studies (GWAS) (October 15, 2024)
+# Practice Session #2: Genome-wide Association Studies (GWAS) (April 3, 2025)
 
 In this session, we will learn how to conduct the genome-wide association analysis using SAIGE. \
 (References: [Paper](https://www.nature.com/articles/s41588-018-0184-y), [Github](https://github.com/saigegit/SAIGE), [Documentation](https://saigegit.github.io/SAIGE-doc/)) \
-This document was created on October 14, 2024 and the following contents were tested on the Lee Lab cluster (Ubuntu 18.04 LTS).
+This document was created on April 3, 2025 and the following contents were tested on the Lee Lab cluster (Ubuntu 24.04.1 LTS).
 
 ### 1. Setting up the environment
 
-We will use [Docker](https://www.docker.com/) on the Lee Lab cluster (`leelabsg11` node). \
+We will use [Docker](https://www.docker.com/) on the Lee Lab cluster (`leelabsg15` node). \
 It is already created on the GSDS cluster, but you can create the environment on your local machine with the following command:
 
 ```
 # Pull SAIGE docker image
-sudo docker pull wzhou88/saige:1.3.3
+sudo docker pull wzhou88/saige:1.4.4
 
 # Give previlege to use docker without sudo
 sudo usermod -aG docker $USER
@@ -20,7 +20,7 @@ sudo usermod -aG docker $USER
 You can test if it works:
 
 ```
-docker run --rm -it -v /data/home/leelabguest/GCDA/2_GWAS:/data/home/leelabguest/GCDA/2_GWAS wzhou88/saige:1.3.3 /bin/bash
+docker run --rm -it -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS wzhou88/saige:1.4.4 /bin/bash
 ```
 
 ### 2. Preparing data
@@ -157,12 +157,12 @@ For detailed explanation, please refer the [Notion page](https://admitted-guan-7
 This sparse GRM only needs to be created once for each data set, e.g. a biobank, and can be used for all different phenotypes as long as all tested samples are in the sparse GRM.
 
 ```
-docker run -v /data/home/leelabguest/GCDA/2_GWAS/genotype:/data/home/leelabguest/GCDA/2_GWAS/genotype \
+docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
         -v /data/GCDA/usr:/data/GCDA/usr \
-        wzhou88/saige:1.3.3 createSparseGRM.R \
-        --plinkFile=/data/home/leelabguest/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
+        wzhou88/saige:1.4.4 createSparseGRM.R \
+        --plinkFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
         --nThreads=4 \
-        --outputPrefix=/data/GCDA/usr/YOUR_DIRECTORY/sparseGRM \
+        --outputPrefix=/data/home/gcda_XXX/GCDA/2_GWAS/sparseGRM \
         --numRandomMarkerforSparseKin=2000 \
         --relatednessCutoff=0.125
 ```
@@ -172,16 +172,15 @@ docker run -v /data/home/leelabguest/GCDA/2_GWAS/genotype:/data/home/leelabguest
 ###### Binary trait example
 
 ```
-docker run -v /data/home/leelabguest/GCDA/2_GWAS:/data/home/leelabguest/GCDA/2_GWAS \
-        -v /data/GCDA/usr:/data/GCDA/usr \
-        wzhou88/saige:1.3.3 step1_fitNULLGLMM.R \
-        --plinkFile=/data/home/leelabguest/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
-        --phenoFile=/data/home/leelabguest/GCDA/2_GWAS/phenotype/pheno_example.txt \
+docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
+        wzhou88/saige:1.4.4 step1_fitNULLGLMM.R \
+        --plinkFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
+        --phenoFile=/data/home/gcda_XXX/GCDA/2_GWAS/phenotype/pheno_example.txt \
         --phenoCol=y_binary \
         --covarColList=x1,x2 \
         --sampleIDColinphenoFile=IID \
         --traitType=binary \
-        --outputPrefix=/data/GCDA/usr/YOUR_DIRECTORY/example_binary \
+        --outputPrefix=/data/home/gcda_XXX/GCDA/2_GWAS/example_binary \
         --nThreads=8 \
         --IsOverwriteVarianceRatioFile=TRUE
 ```
@@ -189,17 +188,16 @@ docker run -v /data/home/leelabguest/GCDA/2_GWAS:/data/home/leelabguest/GCDA/2_G
 ###### Quantitative trait example
 
 ```
-docker run -v /data/home/leelabguest/GCDA/2_GWAS:/data/home/leelabguest/GCDA/2_GWAS \
-        -v /data/GCDA/usr:/data/GCDA/usr \
-        wzhou88/saige:1.3.3 step1_fitNULLGLMM.R \
-        --plinkFile=/data/home/leelabguest/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
-        --phenoFile=/data/home/leelabguest/GCDA/2_GWAS/phenotype/pheno_example.txt \
+docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
+        wzhou88/saige:1.4.4 step1_fitNULLGLMM.R \
+        --plinkFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
+        --phenoFile=/data/home/gcda_XXX/GCDA/2_GWAS/phenotype/pheno_example.txt \
         --phenoCol=y_quantitative \
         --invNormalize=TRUE \
         --covarColList=x1,x2 \
         --sampleIDColinphenoFile=IID \
         --traitType=quantitative \
-        --outputPrefix=/data/GCDA/usr/YOUR_DIRECTORY/example_quantitative \
+        --outputPrefix=/data/home/gcda_XXX/GCDA/2_GWAS/example_quantitative \
         --nThreads=8 \
         --IsOverwriteVarianceRatioFile=TRUE
 ```
@@ -211,18 +209,17 @@ You can find more example usages in [SAIGE Documentation page](https://saigegit.
 ###### Quantitative trait example
 
 ```
-docker run -v /data/home/leelabguest/GCDA/2_GWAS:/data/home/leelabguest/GCDA/2_GWAS \
-        -v /data/GCDA/usr:/data/GCDA/usr \
-        wzhou88/saige:1.3.3 step2_SPAtests.R \
-        --vcfFile=/data/home/leelabguest/GCDA/2_GWAS/genotype/genotype_100markers.vcf.gz \
-        --vcfFileIndex=/data/home/leelabguest/GCDA/2_GWAS/genotype/genotype_100markers.vcf.gz.csi \
+docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
+        wzhou88/saige:1.4.4 step2_SPAtests.R \
+        --vcfFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/genotype_100markers.vcf.gz \
+        --vcfFileIndex=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/genotype_100markers.vcf.gz.csi \
         --vcfField=GT \
         --chrom=1 \
         --minMAF=0 \
         --minMAC=10 \
-        --GMMATmodelFile=/data/GCDA/usr/YOUR_DIRECTORY/example_quantitative.rda \
-        --varianceRatioFile=/data/GCDA/usr/YOUR_DIRECTORY/example_quantitative.varianceRatio.txt \
-        --SAIGEOutputFile=/data/GCDA/usr/YOUR_DIRECTORY/step2_quant.txt
+        --GMMATmodelFile=/data/home/gcda_XXX/GCDA/2_GWAS/example_quantitative.rda \
+        --varianceRatioFile=/data/home/gcda_XXX/GCDA/2_GWAS/example_quantitative.varianceRatio.txt \
+        --SAIGEOutputFile=/data/home/gcda_XXX/GCDA/2_GWAS/step2_quant.txt
 ```
 
 
@@ -233,10 +230,10 @@ Using `qqman` package in R, we can draw manhattan plot and Q-Q plot with the GWA
 You can copy files to your local machine (from the server) using `scp` command.
 
 ```
-scp 'leelabguest@147.47.200.131:SOURCE_PATH' DESTINATION_PATH
+scp 'gcda_XXX@147.47.200.131:SOURCE_PATH' DESTINATION_PATH
 
 # Example
-scp 'leelabguest@147.47.200.131:~/GCDA/usr/YOUR_DIRECTORY/*.png' .
+scp 'gcda_XXX@147.47.200.131:~/GCDA/usr/YOUR_DIRECTORY/*.png' .
 ```
 
 And RStudio server is also available on the Lee Lab cluster: http://147.47.200.131:8786/
@@ -245,7 +242,7 @@ And RStudio server is also available on the Lee Lab cluster: http://147.47.200.1
 # Draw manhattan and Q-Q plot (RStudio server)
 library(qqman)
 
-gwas <- read.table("~/GCDA/2_GWAS/plot/step2_quant.txt", header=T)
+gwas <- read.table("~/GCDA/2_GWAS/step2_quant.txt", header=T)
 
 manhattan(gwas, main='Manhattan Plot', chr = "CHR", bp = "POS", snp = "MarkerID", p = "p.value")
 
