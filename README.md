@@ -10,7 +10,7 @@ Processes and codes for various practice sessions will be shared here. Please no
 **TA:** Seokho Jeong ([email](mailto:seokho92@snu.ac.kr))
 
 ### [Session 2 - GWAS](Session2_GWAS.md) (HW)
-**Date:** TBA  
+**Date:** April 3, 2025  
 **TA:** Kisung Nam ([email](mailto:kisung.nam@snu.ac.kr))
 
 ### [Session 3 - Mendelian Randomization](Session3_Mendelian_Randomization.Md)
