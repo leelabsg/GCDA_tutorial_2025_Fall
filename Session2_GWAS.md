@@ -158,7 +158,6 @@ This sparse GRM only needs to be created once for each data set, e.g. a biobank,
 
 ```
 docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
-        -v /data/GCDA/usr:/data/GCDA/usr \
         wzhou88/saige:1.4.4 createSparseGRM.R \
         --plinkFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
         --nThreads=4 \
