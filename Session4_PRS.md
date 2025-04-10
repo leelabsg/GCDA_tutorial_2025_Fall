@@ -1,4 +1,4 @@
-# Practice Session #4: Polygenic Risk Score 
+# Practice Session #3: Polygenic Risk Score 
 
 In this session, we are going to construct polygenic risk score using PRS-CS. \
 References : [PRS-CS github](https://github.com/getian107/PRScs), [PRS-CS paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6467998/). \
@@ -6,7 +6,7 @@ The data we are going to use are already preprocessed or downloaded.
 
 ### 0. Log in to leelabguest
 ``` 
-ssh leelabguest@147.47.200.131 -p 22555
+ssh USERID@147.47.200.131 -p 22555
 ```
 
 ### 1. Activate conda environment
@@ -16,7 +16,7 @@ conda activate python_3
 
 ### 2. Make directory for practice session in your directory
 ``` 
-mkdir /data/GCDA/usr/YOUR_DIRECTORY/practice_4 
+mkdir 3_PRS 
 ``` 
 
 ### 3. Run PRScs 
