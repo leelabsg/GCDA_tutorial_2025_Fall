@@ -1,4 +1,4 @@
-# Practice Session #3: Two-sample Mandelian Randomization (Nov 11, 2024)
+# Practice Session #4: Two-sample Mandelian Randomization (Nov 11, 2024)
 In this session, we will learn how to perform two Sample MR with publicly available GWAS datasets. \
 The overall process in this session is mainly based on the [TwoSampleMR in R vignette](https://mrcieu.github.io/TwoSampleMR/). \
 This document was created on October 28, 2024 and the following contents were tested on LeeLab servers.
