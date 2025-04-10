@@ -19,7 +19,7 @@ cd 3_PRS
 mkdir result 
 ``` 
 
-### 3. While staying in the 3_PRS directory, run the PRScs.py script to calculate polygenic risk scores using PRS-CS.
+### 3. While staying in the 3_PRS directory, run the PRS-CS to calculate polygenic risk scores.
 ```
 python PRScs/PRScs.py \
 --ref_dir=data/reference/ldblk_1kg_eas \
@@ -49,4 +49,4 @@ cd ..
 --score result/prscs_chr1-22.txt 2 4 6 \
 --out result/score
 ``` 
-### NOTE: Since are using relative paths in the commands (except for Step 4), please make sure to run all commands from within the 3_PRS directory. Alternatively, you can modify the commands to use absolute paths if you’re running them from a different location.
+#### NOTE: Since are using relative paths in the commands (except for Step 4), please make sure to run all commands from within the 3_PRS directory. Alternatively, you can modify the commands to use absolute paths if you’re running them from a different location.
