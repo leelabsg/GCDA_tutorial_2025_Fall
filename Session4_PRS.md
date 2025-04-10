@@ -4,15 +4,14 @@ In this session, we are going to construct polygenic risk score using PRS-CS. \
 References : [PRS-CS github](https://github.com/getian107/PRScs), [PRS-CS paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6467998/). \
 The data we are going to use are already preprocessed or downloaded.
 
-### 0. Log in to your accound
+### 1. Log in to your accound
 ``` 
 ssh YOURID@147.47.200.131 -p 22555
 ```
 
-### The server already has Python built-in, so there’s no need to activate a Conda environment. You will see 
+The server already has Python built-in, so there’s no need to activate a Conda environment. 
 
-
-### 1. Navigate to the 3_PRS folder and create a new directory called result to store outputs from the practice session
+### 2. Navigate to the 3_PRS folder and create a new directory called result to store outputs from the practice session
 ```
 cd 3_PRS
 ``` 
@@ -20,7 +19,7 @@ cd 3_PRS
 mkdir result 
 ``` 
 
-### 2. While staying in the 3_PRS directory, run the PRScs.py script to calculate polygenic risk scores using PRS-CS.
+### 3. While staying in the 3_PRS directory, run the PRScs.py script to calculate polygenic risk scores using PRS-CS.
 ```
 python PRScs/PRScs.py \
 --ref_dir=data/reference/ldblk_1kg_eas \
@@ -30,7 +29,7 @@ python PRScs/PRScs.py \
 --out_dir=result/prscs
 ``` 
 
-### 3. Merge chr1 - chr22 beta files into one file 
+### 4. Merge chr1 - chr22 beta files into one file 
 ```
 cd result
 ``` 
@@ -50,3 +49,4 @@ cd ..
 --score result/prscs_chr1-22.txt 2 4 6 \
 --out result/score
 ``` 
+### NOTE: Since are using relative paths in the commands (except for Step 4), please make sure to run all commands from within the 3_PRS directory. Alternatively, you can modify the commands to use absolute paths if you’re running them from a different location.
