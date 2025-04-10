@@ -27,6 +27,16 @@ python PRScs/PRScs.py \
 --sst_file=data/summary_stat/sumstats_prscs.txt \
 --n_gwas=177618 \
 --out_dir=result/prscs
+```
+Use the nohup command to run PRS-CS in the background, allowing the process to continue even if the terminal is closed. The output will be saved to result/nohup.out.
+```
+nohup python PRScs/PRScs.py \
+--ref_dir=data/reference/ldblk_1kg_eas \
+--bim_prefix=data/plink/sample \
+--sst_file=data/summary_stat/sumstats_prscs.txt \
+--n_gwas=177618 \
+--out_dir=result/prscs > result/nohup.out &
+
 ``` 
 
 ### 4. Navigate to the result folder and combine PRS-CS Output Files (chr1–chr22) into a Single File
