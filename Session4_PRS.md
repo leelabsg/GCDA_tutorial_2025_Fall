@@ -4,7 +4,7 @@ In this session, we are going to construct polygenic risk score using PRS-CS. \
 References : [PRS-CS github](https://github.com/getian107/PRScs), [PRS-CS paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6467998/). \
 The data we are going to use are already preprocessed or downloaded.
 
-### 1. Log in to your accound
+### 1. Log in to your account
 ``` 
 ssh YOURID@147.47.200.131 -p 22555
 ```
@@ -29,7 +29,7 @@ python PRScs/PRScs.py \
 --out_dir=result/prscs
 ``` 
 
-### 4. Merge chr1 - chr22 beta files into one file 
+### 4. Navigate to the result folder and combine PRS-CS Output Files (chr1–chr22) into a Single File
 ```
 cd result
 ``` 
