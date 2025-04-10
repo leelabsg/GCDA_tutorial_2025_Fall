@@ -1,4 +1,4 @@
-# Practice Session #3: Polygenic Risk Score 
+# Practice Session #3: Polygenic Risk Score (May 1, 2025)
 
 In this session, we are going to construct polygenic risk score using PRS-CS. \
 References : [PRS-CS github](https://github.com/getian107/PRScs), [PRS-CS paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6467998/). \
