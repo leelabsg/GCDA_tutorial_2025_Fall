@@ -4,10 +4,14 @@ In this session, we are going to construct polygenic risk score using PRS-CS. \
 References : [PRS-CS github](https://github.com/getian107/PRScs), [PRS-CS paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6467998/). \
 The data we are going to use are already preprocessed or downloaded.
 
-### 1. Log in to your account
+### 1. Log in to your account and access the desired compute node
 ``` 
 ssh YOURID@147.47.200.131 -p 22555
 ```
+``` 
+ssh leelabsg15
+```
+
 
 The server already has Python built-in, so there’s no need to activate a Conda environment. 
 
