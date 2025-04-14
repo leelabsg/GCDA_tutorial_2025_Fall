@@ -54,7 +54,7 @@ Columns 2, 4, and 6 represent the SNP ID, the effect allele, and the effect size
 cd ..
 ```
 ```
-/data/home/leelabguest/utils/plink \
+/data/GCDA/plink \
 --bfile data/plink/sample \
 --score result/prscs_chr1-22.txt 2 4 6 \
 --out result/score
