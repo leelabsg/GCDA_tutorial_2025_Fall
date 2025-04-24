@@ -14,7 +14,7 @@ Processes and codes for various practice sessions will be shared here. Please no
 **TA:** Kisung Nam ([email](mailto:kisung.nam@snu.ac.kr))
 
 ### [Session 3 - PRS](Session3_PRS.md)  (HW)
-**Date:** April 24, 2025  
+**Date:** May 01, 2025  
 **TA:** Na Yeon Kim ([email](mailto:nayeonkim1@snu.ac.kr))
 
 ### [Session 4 - Mendelian Randomization](Session4_Mendelian_Randomization.Md)
