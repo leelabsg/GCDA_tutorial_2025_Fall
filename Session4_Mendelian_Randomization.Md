@@ -1,6 +1,6 @@
 # Practice Session #4: Two-sample Mandelian Randomization (May 8, 2025)
 In this session, we will learn how to perform two Sample MR with publicly available GWAS datasets. \
-The overall process in this session is mainly based on the [TwoSampleMR in R vignette](https://mrcieu.github.io/TwoSampleMR/). \
+The overall process in this session is mainly based on the [TwoSampleMR in R vignette](https://mrcieu.github.io/TwoSampleMR/).
 
 #### Two Sample MR
 
@@ -160,7 +160,6 @@ outcome_DM = fread('/data/home/leelabguest/MR_tutorial/data/phenocode-KoGES_DM.t
 head(outcome_DM)
 outcome_DM = outcome_DM %>% mutate(eaf = (case_af*5083+control_af*67127)/72210,n = 72210,pheno = "DM") 
 ```
-![image](https://github.com/chkang96/GCDA/blob/0a3eec28848d0fa1b7dd2c0ae8753f8ee9a28be0/Screenshot%202024-11-03%20at%208.27.28%20PM.png)
 
 SNP columns
 ```
@@ -217,64 +216,6 @@ p4 <- mr_leaveoneout_plot(res_loo)
 ggplot2::ggsave(p4[[1]], file = "/data/home/leelabguest/MR_tutorial/results/HDL_T2D_LOO.png", width = 7, height = 7)
 ```
 
-### 8. Real Data Practice #2
-Let's try another example, this time when both the exposure and outcome summary statistics are from published sources. 
-It is important to note that the source of your data fits the design of your MR experiment. The 2nd practice is from an MR design regarding use of Statins on the PLA2G7 protein expression level. 
 
-Here, the exposure SNPs come from a MR study of statins and cancer. Since statins work directly on the HMGCR gene region in order to lower LDL levels, we use genome-wide significant SNPs (p < 5E-8) in the HMGCR gene region from the source summary statistic as "proxies" for statin use. 
-
-Key point: When involving drug targets, it was important to identify SNPs from the target gene region associated with the exposure phenotype (LDL levels). 
-
-Exposure source: https://elifesciences.org/articles/57191 \
-Outcome source: UKB-PPP Olink Proteomics data
-
-Same as before, we read in exposure and outcome files and then harmonize and then view outputs
-```
-file_exp<-'/data/home/leelabguest/MR_tutorial/data/Statin_GWAS_0806.txt' 
-ldl_exp_dat_org <- read_exposure_data( 
-    filename = file_exp,
-    sep = "\t",
-    snp_col = "pos",
-    beta_col = "beta",
-    se_col = "se",
-    effect_allele_col = "A1",
-    other_allele_col = "A2",
-    eaf_col = "Freq.A1.1000G.EUR",
-    pval_col = "P-value"
-)
-```
-```
-file_protein<-'/data/home/leelabguest/MR_tutorial/data/PLA2G7_outcome_SNP.txt'
-outcome_dat <- read_outcome_data(
-    filename = file_protein,
-    sep = ",",
-    snp_col = "POS_19",
-    beta_col = "BETA",
-    se_col = "SE",
-    effect_allele_col = "ALLELE1",
-    other_allele_col = "ALLELE0",
-    eaf_col = "A1FREQ",
-    pval_col = "P",
-    phenotype_col = "FILE_Index"
-)
-```
-```
-dat <- harmonise_data(
-    exposure_dat = ldl_exp_dat_org, 
-    outcome_dat = outcome_dat
-)
-
-res <- mr(dat, method_list = c("mr_weighted_median", "mr_egger_regression", "mr_ivw"))
-```
-Optional P-value adjustments:
-```
-res$p.BH<-p.adjust(res$pval, method = "BH")
-```
-
-### 9. Tips
-
-1) Use genome-wide significant SNPs (p < 5E-8) in your exposure/outcome files.
-2) Consider LD clumping when you have too many SNPs. Most MR studies typically use from 10 to a few hundred SNPs. LD clumping and all the rest of the work we did today is available here: https://mrcieu.github.io/TwoSampleMR/index.html
-3) Conduct many sensitivity analyses to give you a better idea about the MR results.
 
 
