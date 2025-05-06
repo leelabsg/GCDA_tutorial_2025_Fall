@@ -39,7 +39,7 @@ The [IEU](https://gwas.mrcieu.ac.uk/) GWAS database (IGD) contains complete GWAS
 
 From the package, available_outcomes() will list up outcomes obtainable from IEU. 
 ```
-ao <- available_outcomes(options(ieugwasr_api = 'gwas-api.mrcieu.ac.uk/'))
+ao <- available_outcomes()
 head(ao)
 ```
 ### 3. Exposure Data Example
