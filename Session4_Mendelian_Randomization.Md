@@ -52,8 +52,8 @@ We want to discover causal relationship between BMI and CHD. \
 BMI comes from [GIANT](https://gwas.mrcieu.ac.uk/datasets/ieu-a-2/) Consortium \
 CHD is from [CARDIoGRAMplusC4D](https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/). 
 
-(Optional) You can import exposure data using the IEU API.
-Example
+(Optional) You can import exposure data using the IEU API. \
+Example:
 ```
 bmi_exp_dat <- extract_instruments(outcomes = 'ieu-a-2')
 ```
