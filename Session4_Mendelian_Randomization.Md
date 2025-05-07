@@ -152,8 +152,8 @@ ggplot2::ggsave(p1[[1]], file = "/data/GCDA/4_MR/Scatter.png", width = 7, height
 ```
 Download the plot to local computer.
 ```
-scp leelabguest@147.47.200.131:/data/GCDA/4_MR/Scatter.png ./
-scp -P 22555 leelabguest@147.47.200.131:/data/GCDA/4_MR/Scatter.png ./
+scp USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/USER_ID/GCDA/Scatter.png ./
+scp -P 22555 -J USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/beahn/GCDA/Scatter.png ./
 ```
 ![filename](https://user-images.githubusercontent.com/22064612/235652335-b57f0381-b820-47e0-a07f-da09564f9c0b.png)
 
