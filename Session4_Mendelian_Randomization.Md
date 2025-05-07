@@ -56,7 +56,6 @@ CHD is from [CARDIoGRAMplusC4D](https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/).
 Example
 ```
 bmi_exp_dat <- extract_instruments(outcomes = 'ieu-a-2')
-head(bmi_exp_dat)
 ```
 
 In this practice, we are going to use "MRInstruments" library to import instrumental variables for MR.
@@ -70,6 +69,8 @@ bmi_gwas <-
   subset(gwas_catalog,
          PubmedID == 25673413)
 bmi_exp_dat <- format_data(bmi_gwas)
+
+head(bmi_exp_dat)
 ```
 
 
