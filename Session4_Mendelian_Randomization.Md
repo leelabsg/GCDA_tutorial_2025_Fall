@@ -80,8 +80,7 @@ bmi_exp_dat <- read_exposure_data(
 
 
 ### 4. Outcome Data Example
-(Optional) You can import outcome data using the IEU API, as well. \
-By taking snps argument, we can scope the common variant list with BMI  
+(Optional) You can import outcome data using the IEU API, as well.  
 ```
 chd_out_dat <- extract_outcome_data(
     snps = bmi_exp_dat$SNP,
