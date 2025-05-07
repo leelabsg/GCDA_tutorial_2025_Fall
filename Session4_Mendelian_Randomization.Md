@@ -20,6 +20,7 @@ Next, Load the necessary packages
 library(TwoSampleMR)
 ```
 
+
 ### 1. Two Sample Mandelian Randomization Overview
 The workflow for performing MR is as follows:
 
@@ -32,6 +33,8 @@ The workflow for performing MR is as follows:
 #### d. Perform MR analysis, sensitivity analyses, create plots, compile reports
 
 ![Twosamplemr_Diagram](https://user-images.githubusercontent.com/22064612/235571598-61784c94-bb0e-44ce-887d-c73a0593dbe6.png)
+
+
 ### 2. IEU GWAS database
 The [IEU](https://gwas.mrcieu.ac.uk/) GWAS database (IGD) contains complete GWAS summary statistics from a large number of studies. You can browse them through the website. \
 <img width="746" alt="image" src="https://user-images.githubusercontent.com/22064612/235642892-b283511b-6e2e-410a-9f7b-3c0611b325f7.png">
@@ -41,6 +44,8 @@ From the package, available_outcomes() will list up outcomes obtainable from IEU
 ao <- available_outcomes()
 head(ao)
 ```
+
+
 ### 3. Exposure Data Example
 In this part of session, we will follow the example from the package using formatted summary statistics. \
 We want to discover causal relationship between BMI and CHD. \
@@ -66,6 +71,7 @@ bmi_gwas <-
          PubmedID == 25673413)
 bmi_exp_dat <- format_data(bmi_gwas)
 ```
+
 
 ### 4. Outcome Data Example
 (Optional) You can import outcome data using the IEU API, as well.
@@ -94,6 +100,7 @@ chd_outcome_dat <- read_outcome_data(
 head(chd_out_dat)
 ```
 
+
 ### 5. Harmonizing Data
 Harmonizing data step is required because there are mismatches between alleles in exposure and outcome. Recent GWASs typically present the effects of a SNP in reference to the allele on the forward strand but not necessarily.
 ![image](https://user-images.githubusercontent.com/22064612/235645818-0c25fa91-7ba8-4dcf-9066-406e2db0eb9e.png)
@@ -110,6 +117,7 @@ There are three options to harmonising the data.
 2. Try to infer the forward strand alleles using allele frequency information 
 3. Correct the strand for non-palindromic SNPs, but drop all palindromic SNPs \
 By default, the harmonise_data function uses option 2, but this can be modified using the action argument, e.g. harmonise_data(exposure_dat, outcome_dat, action = 3).
+
 
 ### 6. Perform MR
 Before we perform MR, lets find out which method is available in the package
@@ -148,12 +156,12 @@ Let's save to pdf using ggsave() from ggplot2
 res <- mr(dat)
 p1 <- mr_scatter_plot(res, dat)
 print(length(p1))
-ggplot2::ggsave(p1[[1]], file = "/data/GCDA/4_MR/Scatter.png", width = 7, height = 7)
+ggplot2::ggsave(p1[[1]], file = "/data/home/USER_ID/Scatter.png", width = 7, height = 7)
 ```
 Download the plot to local computer.
 ```
-scp USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/USER_ID/GCDA/Scatter.png ./
-scp -P 22555 -J USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/beahn/GCDA/Scatter.png ./
+scp USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/USER_ID/Scatter.png ./
+scp -P 22555 -J USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/USER_ID/Scatter.png ./
 ```
 ![filename](https://user-images.githubusercontent.com/22064612/235652335-b57f0381-b820-47e0-a07f-da09564f9c0b.png)
 
@@ -163,9 +171,9 @@ Single SNP MR can be also performed by following. We can visualize the results v
 res_single <- mr_singlesnp(dat)
 head(res_single)
 p2 <- mr_forest_plot(res_single)
-ggplot2::ggsave(p2[[1]], file = "/data/GCDA/4_MR/Forest.png", width = 7, height = 7)
+ggplot2::ggsave(p2[[1]], file = "/data/home/USER_ID/Forest.png", width = 7, height = 7)
 p3 <- mr_funnel_plot(res_single)
-ggplot2::ggsave(p3[[1]], file = "/data/GCDA/4_MR/Funnel.png", width = 7, height = 7)
+ggplot2::ggsave(p3[[1]], file = "/data/home/USER_ID/Funnel.png", width = 7, height = 7)
 ```
 To see if a single snp is driving the association, we can perform leave-one-out MR.
 In this case, we can see that there is no single variant that driving the association between exposure and outcome.
@@ -173,7 +181,7 @@ In this case, we can see that there is no single variant that driving the associ
 res_loo <- mr_leaveoneout(dat)
 head(res_loo) ; summary(res_loo$p)
 p4 <- mr_leaveoneout_plot(res_loo)
-ggplot2::ggsave(p4[[1]], file = "/data/GCDA/4_MR/LOO.png", width = 7, height = 7)
+ggplot2::ggsave(p4[[1]], file = "/data/home/USER_ID/LOO.png", width = 7, height = 7)
 ```
 
 
