@@ -18,7 +18,6 @@ remotes::install_github("MRCIEU/TwoSampleMR")
 Next, Load the necessary packages
 ```
 library(TwoSampleMR)
-library(ggplot2)
 ```
 
 ### 1. Two Sample Mandelian Randomization Overview
