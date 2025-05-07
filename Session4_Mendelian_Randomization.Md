@@ -138,22 +138,12 @@ Intercept term in MR egger regression indicate the presence of Horizontal Pleiot
 ```
 mr_pleiotropy_test(dat)
 ```
-Single SNP MR can be also performed by following.
-```
-res_single <- mr_singlesnp(dat)
-head(res_single)
-```
-To see if a single snp is driving the association, we can perform leave-one-out MR.
-In this case, we can see that there is no single variant that driving the association between exposure and outcome.
-```
-res_loo <- mr_leaveoneout(dat)
-head(res_loo)
-```
 
 Visualizing MR analysis with plot can be performed as below:
 Let's save to pdf using ggsave() from ggplot2
 ```
-res <- mr(dat)
+library(ggplot2)
+
 p1 <- mr_scatter_plot(res, dat)
 print(length(p1))
 ggplot2::ggsave(p1[[1]], file = "/data/home/USER_ID/Scatter.png", width = 7, height = 7)
