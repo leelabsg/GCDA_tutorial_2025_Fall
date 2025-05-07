@@ -46,36 +46,54 @@ In this part of session, we will follow the example from the package using forma
 We want to discover causal relationship between BMI and CHD. \
 BMI comes from [GIANT](https://gwas.mrcieu.ac.uk/datasets/ieu-a-2/) Consortium \
 CHD is from [CARDIoGRAMplusC4D](https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/). 
+
+(Optional) You can import exposure data using the IEU API.
+Example
 ```
 bmi_exp_dat <- extract_instruments(outcomes = 'ieu-a-2')
 head(bmi_exp_dat)
 ```
-The output from this function is a new data frame with standardized column names: 
-- SNP
-- exposure
-- beta.exposure
-- se.exposure
-- effect_allele.exposure
-- other_allele.exposure
-- eaf.exposure
-- mr_keep.exposure
-- pval.exposure
-- pval_origin.exposure
-- id.exposure
-- data_source.exposure
-- units.exposure
-- gene.exposure
-- samplesize.exposure
+
+In this practice, we are going to use "MRInstruments" library to import instrumental variables for MR.
+```
+remotes::install_github("MRCIEU/MRInstruments")
+library(MRInstruments)
+data(gwas_catalog)
+```
+```
+bmi_gwas <-
+  subset(gwas_catalog,
+         PubmedID == 25673413)
+bmi_exp_dat <- format_data(bmi_gwas)
+```
+
 ### 4. Outcome Data Example
-Following similar procedure as Exposure data acquirment, let's bring CHD summary statistics.
+(Optional) You can import outcome data using the IEU API, as well.
 By taking snps argument, we can scope the common variant list with BMI  
 ```
 chd_out_dat <- extract_outcome_data(
     snps = bmi_exp_dat$SNP,
     outcomes = 'ieu-a-7'
 )
+```
+In this practice, we are going to import outcome data using GWAS summary file from [GWAS catalog](https://www.ebi.ac.uk/gwas/).
+```
+chd_outcome_dat <- read_outcome_data(
+    snps = bmi_exp_dat$SNP,
+    filename = "/data/GCDA/4_MR/26343387-GCST003116-EFO_0000378.h.tsv",
+    sep = "\t",
+    snp_col = "variant_id",
+    beta_col = "beta",
+    se_col = "standard_error",
+    effect_allele_col = "effect_allele",
+    other_allele_col = "other_allele",
+    eaf_col = "effect_allele_frequency",
+    pval_col = "p_value",
+    samplesize_col = "nstudy"
+)
 head(chd_out_dat)
 ```
+
 ### 5. Harmonizing Data
 Harmonizing data step is required because there are mismatches between alleles in exposure and outcome. Recent GWASs typically present the effects of a SNP in reference to the allele on the forward strand but not necessarily.
 ![image](https://user-images.githubusercontent.com/22064612/235645818-0c25fa91-7ba8-4dcf-9066-406e2db0eb9e.png)
@@ -92,6 +110,7 @@ There are three options to harmonising the data.
 2. Try to infer the forward strand alleles using allele frequency information 
 3. Correct the strand for non-palindromic SNPs, but drop all palindromic SNPs \
 By default, the harmonise_data function uses option 2, but this can be modified using the action argument, e.g. harmonise_data(exposure_dat, outcome_dat, action = 3).
+
 ### 6. Perform MR
 Before we perform MR, lets find out which method is available in the package
 ```
@@ -129,82 +148,24 @@ Let's save to pdf using ggsave() from ggplot2
 res <- mr(dat)
 p1 <- mr_scatter_plot(res, dat)
 print(length(p1))
-ggplot2::ggsave(p1[[1]], file = "/data/home/leelabguest/MR_tutorial/IEU_example_Scatter.png", width = 7, height = 7)
+ggplot2::ggsave(p1[[1]], file = "/data/GCDA/4_MR/Scatter.png", width = 7, height = 7)
 ```
 Download the plot to local computer.
 ```
-scp leelabguest@147.47.200.131:/data/home/leelabguest/MR_tutorial/IEU_example_Scatter.png ./
-scp -P 22555 leelabguest@147.47.200.131:/data/home/leelabguest/MR_tutorial/IEU_example_Scatter.png ./
+scp leelabguest@147.47.200.131:/data/GCDA/4_MR/Scatter.png ./
+scp -P 22555 leelabguest@147.47.200.131:/data/GCDA/4_MR/Scatter.png ./
 ```
 ![filename](https://user-images.githubusercontent.com/22064612/235652335-b57f0381-b820-47e0-a07f-da09564f9c0b.png)
 
-### 7. Real Data Practice
-Let's try two-sample MR between HDL exposure and Diabetes outcome 
-#### [HDL](https://gwas.mrcieu.ac.uk/datasets/ieu-a-299/) Exposure data from IEU GWAS
-```
-HDL_exp_dat <- extract_instruments(outcomes = 'ieu-a-299')
-head(HDL_exp_dat)
-```
 
-#### Diabetes outcome data downloaded from [Pheweb](https://koges.leelabsg.org/pheno/KoGES_DM)
-The downloaded summary statistics on Diabetes Malitious from KoGES pheweb is located in ~/GCDA/MR_tutorial/data \
-It is saved as tab-delimited format(.tsv), we can take a look. \
-manual outcome data frame should include snps, beta, effect, se, alleles, eaf column. \
-Since we have case af and control af, we can generate eaf.
-
-```
-library(data.table)
-library(dplyr)
-outcome_DM = fread('/data/home/leelabguest/MR_tutorial/data/phenocode-KoGES_DM.tsv')
-head(outcome_DM)
-outcome_DM = outcome_DM %>% mutate(eaf = (case_af*5083+control_af*67127)/72210,n = 72210,pheno = "DM") 
-```
-
-SNP columns
-```
-outcome_dat <- format_data(
-    type="outcome",
-    phenotype_col="pheno",
-    dat = data.frame(outcome_DM),
-    snps = HDL_exp_dat$SNP,
-    snp_col = "rsids",
-    beta_col = "beta",
-    se_col = "sebeta",
-    effect_allele_col = "ref",
-    other_allele_col = "alt",
-    eaf_col = "eaf",
-    samplesize_col = "n"
-)
-```
-#### Harmonizing data step & perform MR
-```
-dat <- harmonise_data(
-    exposure_dat = HDL_exp_dat, 
-    outcome_dat = outcome_dat
-)
-res = mr(dat)
-res
-p1 <- mr_scatter_plot(res, dat)
-ggplot2::ggsave(p1[[1]], file = "/data/home/leelabguest/MR_tutorial/results/HDL_T2D_Scatter.png", width = 7, height = 7)
-```
-
-Heterogeneity test indicates there is a presence of heterogeneity between exposure and outcome, \
-which is reasonable since the population group is different (Global vs KOR)
-```
-mr_heterogeneity(dat)
-```
-There is a slight evidence of horizontal pleiotropy 
-```
-mr_pleiotropy_test(dat)
-```
 Single SNP MR can be also performed by following. We can visualize the results via forest and funnel plots
 ```
 res_single <- mr_singlesnp(dat)
 head(res_single)
 p2 <- mr_forest_plot(res_single)
-ggplot2::ggsave(p2[[1]], file = "/data/home/leelabguest/MR_tutorial/results/HDL_T2D_Forest.png", width = 7, height = 7)
+ggplot2::ggsave(p2[[1]], file = "/data/GCDA/4_MR/Forest.png", width = 7, height = 7)
 p3 <- mr_funnel_plot(res_single)
-ggplot2::ggsave(p3[[1]], file = "/data/home/leelabguest/MR_tutorial/results/HDL_T2D_Funnel.png", width = 7, height = 7)
+ggplot2::ggsave(p3[[1]], file = "/data/GCDA/4_MR/Funnel.png", width = 7, height = 7)
 ```
 To see if a single snp is driving the association, we can perform leave-one-out MR.
 In this case, we can see that there is no single variant that driving the association between exposure and outcome.
@@ -212,7 +173,7 @@ In this case, we can see that there is no single variant that driving the associ
 res_loo <- mr_leaveoneout(dat)
 head(res_loo) ; summary(res_loo$p)
 p4 <- mr_leaveoneout_plot(res_loo)
-ggplot2::ggsave(p4[[1]], file = "/data/home/leelabguest/MR_tutorial/results/HDL_T2D_LOO.png", width = 7, height = 7)
+ggplot2::ggsave(p4[[1]], file = "/data/GCDA/4_MR/LOO.png", width = 7, height = 7)
 ```
 
 
