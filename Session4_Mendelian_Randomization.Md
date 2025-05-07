@@ -146,7 +146,7 @@ Let's save to pdf using ggsave() from ggplot2
 library(ggplot2)
 
 p1 <- mr_scatter_plot(res, dat)
-ggplot2::ggsave(p1[[1]], file = "/data/home/USER_ID/Scatter.png", width = 7, height = 7)
+ggplot2::ggsave(p1[[1]], file = FILE_PATH, width = 7, height = 7)
 ```
 Download the plot to local computer.
 ```
@@ -160,9 +160,9 @@ Single SNP MR can be also performed by following. We can visualize the results v
 res_single <- mr_singlesnp(dat)
 head(res_single)
 p2 <- mr_forest_plot(res_single)
-ggplot2::ggsave(p2[[1]], file = "/data/home/USER_ID/Forest.png", width = 7, height = 7)
+ggplot2::ggsave(p2[[1]], file = FILE_PATH, width = 7, height = 7)
 p3 <- mr_funnel_plot(res_single)
-ggplot2::ggsave(p3[[1]], file = "/data/home/USER_ID/Funnel.png", width = 7, height = 7)
+ggplot2::ggsave(p3[[1]], file = FILE_PATH, width = 7, height = 7)
 ```
 To see if a single snp is driving the association, we can perform leave-one-out MR.
 In this case, we can see that there is no single variant that driving the association between exposure and outcome.
@@ -170,7 +170,7 @@ In this case, we can see that there is no single variant that driving the associ
 res_loo <- mr_leaveoneout(dat)
 head(res_loo) ; summary(res_loo$p)
 p4 <- mr_leaveoneout_plot(res_loo)
-ggplot2::ggsave(p4[[1]], file = "/data/home/USER_ID/LOO.png", width = 7, height = 7)
+ggplot2::ggsave(p4[[1]], file = FILE_PATH, width = 7, height = 7)
 ```
 
 
