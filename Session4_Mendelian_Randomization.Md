@@ -150,8 +150,7 @@ ggplot2::ggsave(p1[[1]], file = "/data/home/USER_ID/Scatter.png", width = 7, hei
 ```
 Download the plot to local computer.
 ```
-scp USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/USER_ID/Scatter.png ./
-scp -P 22555 -J USER_ID@147.47.200.131 USER_ID@leelabsg15:/data/home/USER_ID/Scatter.png ./
+scp -P 22555 USER_ID@147.47.200.131:FILE_PATH ./
 ```
 ![filename](https://user-images.githubusercontent.com/22064612/235652335-b57f0381-b820-47e0-a07f-da09564f9c0b.png)
 
