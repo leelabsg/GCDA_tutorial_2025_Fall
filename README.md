@@ -18,7 +18,7 @@ Processes and codes for various practice sessions will be shared here. Please no
 **TA:** Na Yeon Kim ([email](mailto:nayeonkim1@snu.ac.kr))
 
 ### [Session 4 - Mendelian Randomization](Session4_Mendelian_Randomization.Md)
-**Date:** TBA   
+**Date:** May 08, 2025   
 **TA:** Bo-Eun Ahn ([email](mailto:ahnbo@snu.ac.kr))
 
 ### Session 5 - EHR
