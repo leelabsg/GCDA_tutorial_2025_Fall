@@ -77,7 +77,7 @@ bmi_exp_dat <- read_exposure_data(
     samplesize_col = "n"
 )
 ```
-For standard two sample MR it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS data, it is necessary to perform **clumping** to ensure independence between instrumental variables.
+For standard two sample MR it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS summary, it is necessary to perform **clumping** to ensure independence between instrumental variables.
 
 
 ### 4. Outcome Data Example
