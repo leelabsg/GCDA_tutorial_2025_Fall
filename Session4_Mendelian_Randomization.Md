@@ -69,8 +69,6 @@ bmi_gwas <-
   subset(gwas_catalog,
          PubmedID == 25673413)
 bmi_exp_dat <- format_data(bmi_gwas)
-
-head(bmi_exp_dat)
 ```
 
 
@@ -98,7 +96,6 @@ chd_out_dat <- read_outcome_data(
     pval_col = "p_value",
     samplesize_col = "nstudy"
 )
-head(chd_out_dat)
 ```
 
 
