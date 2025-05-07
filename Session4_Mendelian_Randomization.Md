@@ -146,7 +146,6 @@ Let's save to pdf using ggsave() from ggplot2
 library(ggplot2)
 
 p1 <- mr_scatter_plot(res, dat)
-print(length(p1))
 ggplot2::ggsave(p1[[1]], file = "/data/home/USER_ID/Scatter.png", width = 7, height = 7)
 ```
 Download the plot to local computer.
