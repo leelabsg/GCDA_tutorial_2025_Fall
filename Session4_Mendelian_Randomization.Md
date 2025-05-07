@@ -58,7 +58,7 @@ Example
 bmi_exp_dat <- extract_instruments(outcomes = 'ieu-a-2')
 ```
 
-In this practice, we are going to use "TwoSampleMR" package tutorial file for instrumental variables.
+In this practice, we are going to use a tutorial sample file in "TwoSampleMR" package for instrumental variables.
 ```
 bmi_file <- system.file("extdata", "bmi_exp.txt", package = "TwoSampleMR")
 
@@ -77,7 +77,7 @@ bmi_exp_dat <- read_exposure_data(
     samplesize_col = "n"
 )
 ```
-For standard two sample MR it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS summary, it is necessary to perform **clumping** to ensure independence between instrumental variables.
+For standard two sample MR, it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS summary of your own or other studies, it is necessary to perform **clumping** to ensure independence between instrumental variables.
 
 
 ### 4. Outcome Data Example
