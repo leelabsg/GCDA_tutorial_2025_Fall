@@ -171,7 +171,6 @@ To see if a single snp is driving the association, we can perform leave-one-out 
 In this case, we can see that there is no single variant that driving the association between exposure and outcome.
 ```
 res_loo <- mr_leaveoneout(dat)
-head(res_loo) ; summary(res_loo$p)
 p4 <- mr_leaveoneout_plot(res_loo)
 ggplot2::ggsave(p4[[1]], file = FILE_PATH, width = 7, height = 7)
 ```
