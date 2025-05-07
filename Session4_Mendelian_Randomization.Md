@@ -77,6 +77,7 @@ bmi_exp_dat <- read_exposure_data(
     samplesize_col = "n"
 )
 ```
+For standard two sample MR it is important to ensure that the *instruments for the exposure are independent*.  
 
 
 ### 4. Outcome Data Example
