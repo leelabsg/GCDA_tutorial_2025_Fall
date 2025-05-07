@@ -58,17 +58,24 @@ Example
 bmi_exp_dat <- extract_instruments(outcomes = 'ieu-a-2')
 ```
 
-In this practice, we are going to use "MRInstruments" library to import instrumental variables for MR.
+In this practice, we are going to use "TwoSampleMR" package tutorial file for instrumental variables.
 ```
-remotes::install_github("MRCIEU/MRInstruments")
-library(MRInstruments)
-data(gwas_catalog)
-```
-```
-bmi_gwas <-
-  subset(gwas_catalog,
-         PubmedID == 25673413)
-bmi_exp_dat <- format_data(bmi_gwas)
+bmi_file <- system.file("extdata", "bmi_exp.txt", package = "TwoSampleMR")
+
+bmi_exp_dat <- read_exposure_data(
+    filename = bmi_file,
+    sep = ",",
+    snp_col = "rsid",
+    beta_col = "effect",
+    se_col = "SE",
+    effect_allele_col = "a1",
+    other_allele_col = "a2",
+    eaf_col = "a1_freq",
+    pval_col = "p-value",
+    units_col = "Units",
+    gene_col = "Gene",
+    samplesize_col = "n"
+)
 ```
 
 
