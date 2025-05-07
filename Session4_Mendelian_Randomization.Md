@@ -145,7 +145,7 @@ mr_pleiotropy_test(dat)
 ```
 
 Visualizing MR analysis with plot can be performed as below:
-Let's save to pdf using ggsave() from ggplot2
+Let's save the figure using ggsave() from ggplot2
 ```
 library(ggplot2)
 
