@@ -39,7 +39,7 @@ The workflow for performing MR is as follows:
 The [IEU](https://gwas.mrcieu.ac.uk/) GWAS database (IGD) contains complete GWAS summary statistics from a large number of studies. You can browse them through the website. \
 <img width="746" alt="image" src="https://user-images.githubusercontent.com/22064612/235642892-b283511b-6e2e-410a-9f7b-3c0611b325f7.png">
 
-You can check the list of available data obtainable from IEU using available_outcomes().ao 
+From the package, available_outcomes() will list up outcomes obtainable from IEU.
 ```
 ao <- available_outcomes()
 head(ao)
