@@ -173,7 +173,7 @@ Let's save the figure using ggsave() from ggplot2
 library(ggplot2)
 
 p1 <- mr_scatter_plot(res, dat)
-ggplot2::ggsave(p1[[1]], file = FILE_PATH, width = 7, height = 7)
+ggplot2::ggsave(p1[[1]], file = <FILE_PATH>, width = 7, height = 7)
 ```
 In case that you want to download the plot to local computer, you can use the script below on your local terminal.
 ```
@@ -189,18 +189,18 @@ head(res_single)
 
 # forest plot
 p2 <- mr_forest_plot(res_single)
-ggplot2::ggsave(p2[[1]], file = FILE_PATH, width = 7, height = 7)
+ggplot2::ggsave(p2[[1]], file = <FILE_PATH>, width = 7, height = 7)
 
 # funnel plot
 p3 <- mr_funnel_plot(res_single)
-ggplot2::ggsave(p3[[1]], file = FILE_PATH, width = 7, height = 7)
+ggplot2::ggsave(p3[[1]], file = <FILE_PATH>, width = 7, height = 7)
 ```
 To see if a single snp is driving the association, we can perform leave-one-out MR.
 In this case, we can see that there is no single variant that driving the association between exposure and outcome.
 ```
 res_loo <- mr_leaveoneout(dat)
 p4 <- mr_leaveoneout_plot(res_loo)
-ggplot2::ggsave(p4[[1]], file = FILE_PATH, width = 7, height = 7)
+ggplot2::ggsave(p4[[1]], file = <FILE_PATH>, width = 7, height = 7)
 ```
 
 
