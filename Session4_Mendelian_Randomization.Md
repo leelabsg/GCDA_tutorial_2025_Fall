@@ -39,7 +39,7 @@ The workflow for performing MR is as follows:
 The [IEU](https://gwas.mrcieu.ac.uk/) GWAS database (IGD) contains complete GWAS summary statistics from a large number of studies. You can browse them through the website. \
 <img width="746" alt="image" src="https://user-images.githubusercontent.com/22064612/235642892-b283511b-6e2e-410a-9f7b-3c0611b325f7.png">
 
-(Optional) You can check the list of available data obtainable from IEU using available_outcomes().ao 
+You can check the list of available data obtainable from IEU using available_outcomes().ao 
 ```
 ao <- available_outcomes()
 head(ao)
@@ -52,17 +52,35 @@ We want to discover causal relationship between BMI and CHD. \
 BMI comes from [GIANT](https://gwas.mrcieu.ac.uk/datasets/ieu-a-2/) Consortium \
 CHD is from [CARDIoGRAMplusC4D](https://gwas.mrcieu.ac.uk/datasets/ieu-a-7/). 
 
-(Optional) You can import exposure data using the IEU API. \
-Example:
+You can import exposure data using the IEU API. 
 ```
 bmi_exp_dat <- extract_instruments(outcomes = 'ieu-a-2')
+head(bmi_exp_dat)
 ```
 
-In this practice, we are going to use a tutorial sample file in "TwoSampleMR" package for instrumental variables.
+The output from this function is a new data frame with standardized column names:
+
+SNP
+exposure
+beta.exposure
+se.exposure
+effect_allele.exposure
+other_allele.exposure
+eaf.exposure
+mr_keep.exposure
+pval.exposure
+pval_origin.exposure
+id.exposure
+data_source.exposure
+units.exposure
+gene.exposure
+samplesize.exposure
+
+(Optional) You can import your own GWAS summary for exposure data, as well.
 ```
 bmi_file <- system.file("extdata", "bmi_exp.txt", package = "TwoSampleMR")
 
-bmi_exp_dat <- read_exposure_data(
+bmi_exp_dat2 <- read_exposure_data(
     filename = bmi_file,
     sep = ",",
     snp_col = "rsid",
@@ -81,12 +99,13 @@ For standard two sample MR, it is important to ensure that the **instruments for
 
 
 ### 4. Outcome Data Example
-(Optional) You can import outcome data using the IEU API, as well.  
+Following similar procedure as Exposure data acquirment, let's bring CHD summary statistics. By taking snps argument, we can scope the common variant list with BMI
 ```
 chd_out_dat <- extract_outcome_data(
     snps = bmi_exp_dat$SNP,
     outcomes = 'ieu-a-7'
 )
+head(chd_out_dat)
 ```
 In this practice, we are going to import outcome data using GWAS summary file from [GWAS catalog](https://www.ebi.ac.uk/gwas/).
 ```
