@@ -60,20 +60,20 @@ head(bmi_exp_dat)
 
 The output from this function is a new data frame with standardized column names:
 
-- SNP \
-- exposure \
-- beta.exposure \
-- se.exposure \
-- effect_allele.exposure \
-- other_allele.exposure \
-- eaf.exposure \
-- mr_keep.exposure \
-- pval.exposure \
-- pval_origin.exposure \
-- id.exposure \
-- data_source.exposure \
-- units.exposure \
-- gene.exposure \
+- SNP 
+- exposure 
+- beta.exposure 
+- se.exposure 
+- effect_allele.exposure 
+- other_allele.exposure 
+- eaf.exposure 
+- mr_keep.exposure 
+- pval.exposure 
+- pval_origin.exposure 
+- id.exposure 
+- data_source.exposure 
+- units.exposure 
+- gene.exposure 
 - samplesize.exposure 
 
 (Optional) You can import your own GWAS summary for exposure data, as well.
