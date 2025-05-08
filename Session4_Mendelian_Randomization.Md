@@ -183,8 +183,10 @@ Single SNP MR can be also performed by following. We can visualize the results v
 ```
 res_single <- mr_singlesnp(dat)
 head(res_single)
+# forest plot
 p2 <- mr_forest_plot(res_single)
 ggplot2::ggsave(p2[[1]], file = FILE_PATH, width = 7, height = 7)
+# funnel plot
 p3 <- mr_funnel_plot(res_single)
 ggplot2::ggsave(p3[[1]], file = FILE_PATH, width = 7, height = 7)
 ```
