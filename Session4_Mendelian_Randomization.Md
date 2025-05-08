@@ -153,7 +153,7 @@ mr_method_list()
 Let's try MR with Egger, two sample maximum likelihood,simple median, and IVW. You can add list of methods or methods set by default.
 
 ```
-res <- mr(dat, method_list = c("mr_egger_regression", "mr_two_sample_ml","mr_simple_median","mr_ivw"))
+res <- mr(dat, method_list = c("mr_egger_regression","mr_weighted_median","mr_ivw"))
 res
 ```
 Some Methods can perform sensitivity test which are implemented in mr_heterogeneity()
