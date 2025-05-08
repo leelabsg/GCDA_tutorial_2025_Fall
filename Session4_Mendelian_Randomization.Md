@@ -107,9 +107,9 @@ chd_out_dat <- extract_outcome_data(
 )
 head(chd_out_dat)
 ```
-In this practice, we are going to import outcome data using GWAS summary file from [GWAS catalog](https://www.ebi.ac.uk/gwas/).
+(Optional) You can import your own GWAS summary file for outcome. [GWAS catalog](https://www.ebi.ac.uk/gwas/) provides some useful GWAS summary data.
 ```
-chd_out_dat <- read_outcome_data(
+chd_out_dat2 <- read_outcome_data(
     snps = bmi_exp_dat$SNP,
     filename = "/data/GCDA/4_MR/26343387-GCST003116-EFO_0000378.h.tsv",
     sep = "\t",
@@ -122,6 +122,7 @@ chd_out_dat <- read_outcome_data(
     pval_col = "p_value",
     samplesize_col = "nstudy"
 )
+head(chd_out_dat2)
 ```
 
 
