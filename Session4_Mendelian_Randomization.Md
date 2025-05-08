@@ -96,8 +96,9 @@ bmi_exp_dat2 <- read_exposure_data(
     samplesize_col = "n"
 )
 ```
-For standard two sample MR, it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS summary of your own or other studies, it is necessary to perform **clumping** to ensure independence between instrumental variables.
-For LD_clumpig, you can use [clump_data() function](https://mrcieu.github.io/TwoSampleMR/reference/clump_data.html) provided by the "TwoSampleMR" package. 
+For standard two sample MR, it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS summary of your own or other studies, it is necessary to perform **clumping** to ensure independence between instrumental variables. \
+**Additional note after class**
+For LD_clumpig, you can refer [clump_data() function](https://mrcieu.github.io/TwoSampleMR/reference/clump_data.html) provided by the "TwoSampleMR" package. 
 
 ### 4. Outcome Data Example
 Following similar procedure as Exposure data acquirment, let's bring CHD summary statistics. By taking snps argument, we can scope the common variant list with BMI
