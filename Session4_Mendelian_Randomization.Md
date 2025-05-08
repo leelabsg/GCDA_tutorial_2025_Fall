@@ -172,7 +172,7 @@ library(ggplot2)
 p1 <- mr_scatter_plot(res, dat)
 ggplot2::ggsave(p1[[1]], file = FILE_PATH, width = 7, height = 7)
 ```
-If you want to download the plot to local computer, run below script on your local terminal.
+In case that you want to download the plot to local computer, you can use the script below on your local terminal.
 ```
 scp -P 22555 USER_ID@147.47.200.131:FILE_PATH .
 ```
