@@ -76,7 +76,8 @@ The output from this function is a new data frame with standardized column names
 - gene.exposure 
 - samplesize.exposure 
 
-(Optional) You can import your own GWAS summary for exposure data, as well.
+(Optional) You can import your own GWAS summary for exposure data, as well. \
+Example:
 ```
 bmi_file <- system.file("extdata", "bmi_exp.txt", package = "TwoSampleMR")
 
