@@ -174,7 +174,7 @@ ggplot2::ggsave(p1[[1]], file = FILE_PATH, width = 7, height = 7)
 ```
 Download the plot to local computer.
 ```
-scp -P 22555 USER_ID@147.47.200.131:FILE_PATH ./
+scp -P 22555 USER_ID@147.47.200.131:FILE_PATH .
 ```
 ![filename](https://user-images.githubusercontent.com/22064612/235652335-b57f0381-b820-47e0-a07f-da09564f9c0b.png)
 
