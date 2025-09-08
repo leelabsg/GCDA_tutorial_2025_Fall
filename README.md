@@ -6,19 +6,19 @@ Processes and codes for various practice sessions will be shared here. Please no
 
 ## Practice Session List
 ### [Session 1 - Sequencing Pipeline](Session1_Sequencing.md) (HW)
-**Date:** March 20, 2025  
+**Date:** September 16, 2025  
 **TA:** Seokho Jeong ([email](mailto:seokho92@snu.ac.kr))
 
 ### [Session 2 - GWAS](Session2_GWAS.md) (HW)
-**Date:** April 3, 2025  
+**Date:** TBA  
 **TA:** Kisung Nam ([email](mailto:kisung.nam@snu.ac.kr))
 
 ### [Session 3 - PRS](Session3_PRS.md)  (HW)
-**Date:** May 01, 2025  
+**Date:** TBA  
 **TA:** Na Yeon Kim ([email](mailto:nayeonkim1@snu.ac.kr))
 
 ### [Session 4 - Mendelian Randomization](Session4_Mendelian_Randomization.Md)
-**Date:** May 08, 2025   
+**Date:** TBA   
 **TA:** Bo-Eun Ahn ([email](mailto:ahnbo@snu.ac.kr))
 
 ### Session 5 - EHR
