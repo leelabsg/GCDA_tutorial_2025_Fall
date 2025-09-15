@@ -1,4 +1,4 @@
-# Practice Session #1: Sequencing (Mar. 20, 2025)
+# Practice Session #1: Sequencing (Sep. 16, 2025)
 
 In this session, we will learn how to convert raw unmapped read files (`FASTQ`) to analysis-ready files (`VCF`). \
 The overall process in this session is mainly based on the [GATK Best Practice](https://gatk.broadinstitute.org/hc/en-us/categories/360002302312-Getting-Started). \
