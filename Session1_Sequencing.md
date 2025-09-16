@@ -243,7 +243,7 @@ NON_PF=true
 GATK's variant discovery workflow recommends Burrows-Wheeler Aligner's maximal exact matches (BWA-MEM) algorithm.
 
 ```
-bwa mem -M -t 7 -p ~/1_sequencing/reference/human_g1k_v37.fasta ~/1_sequencing/data/fastq_input_${SID}.fq > aligned_${SID}.sam
+bwa mem -M -t 7 -p /data/GCDA_2025_2/1_sequencing/reference/human_g1k_v37.fasta ~/1_sequencing/data/fastq_input_${SID}.fq > aligned_${SID}.sam
 ```
 
 You can check the contents of the `SAM` file:
@@ -315,8 +315,8 @@ SO=coordinate
 ```
 gatk --java-options '-Xmx10g' BaseRecalibrator \
 -I sorted_${SID}.bam \
--R ~/1_sequencing/reference/human_g1k_v37.fasta \
---known-sites ~/1_sequencing/reference/ALL.wgs.mergedSV.v8.20130502.svs.genotypes.vcf.gz \
+-R /data/GCDA_2025_2/1_sequencing/reference/human_g1k_v37.fasta \
+--known-sites /data/GCDA_2025_2/1_sequencing/reference/ALL.wgs.mergedSV.v8.20130502.svs.genotypes.vcf.gz \
 -O recal_data_${SID}.table
 ```
 
@@ -325,7 +325,7 @@ gatk --java-options '-Xmx10g' BaseRecalibrator \
 ```
 gatk --java-options '-Xmx10g' ApplyBQSR \
 -I sorted_${SID}.bam \
--R ~/1_sequencing/reference/human_g1k_v37.fasta \
+-R /data/GCDA_2025_2/1_sequencing/reference/human_g1k_v37.fasta \
 --bqsr-recal-file recal_data_${SID}.table \
 -O bqsr_${SID}.bam
 ```
@@ -364,7 +364,7 @@ We can convert these `BAM` files to `GVCF` files.
 cd ~/1_sequencing/data
 # Convert BAM for the first individual
 gatk --java-options "-Xms4g" HaplotypeCaller \
--R ~/1_sequencing/reference/human_g1k_v37.fasta \
+-R /data/GCDA_2025_2/1_sequencing/reference/human_g1k_v37.fasta \
 -I ~/1_sequencing/raw_reads/HG00096.chrom20.ILLUMINA.bwa.GBR.exome.20120522.bam \
 -L 20 \
 -ERC GVCF \
@@ -374,7 +374,7 @@ gatk --java-options "-Xms4g" HaplotypeCaller \
 ```
 # Convert BAM for the second individual
 gatk --java-options "-Xms4g" HaplotypeCaller \
--R ~/1_sequencing/reference/human_g1k_v37.fasta \
+-R /data/GCDA_2025_2/1_sequencing/reference/human_g1k_v37.fasta \
 -I ~/1_sequencing/raw_reads/HG00097.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam \
 -L 20 \
 -ERC GVCF \
@@ -384,7 +384,7 @@ gatk --java-options "-Xms4g" HaplotypeCaller \
 ```
 # Convert BAM for the third individual
 gatk --java-options "-Xms4g" HaplotypeCaller \
--R ~/1_sequencing/reference/human_g1k_v37.fasta \
+-R /data/GCDA_2025_2/1_sequencing/reference/human_g1k_v37.fasta \
 -I ~/1_sequencing/raw_reads/HG00099.chrom20.ILLUMINA.bwa.GBR.exome.20130415.bam \
 -L 20 \
 -ERC GVCF \
@@ -404,7 +404,7 @@ bcftools view -v indels sample03_20.g.vcf | grep -v '##' | head
 
 ```
 gatk CombineGVCFs \
--R ~/1_sequencing/reference/human_g1k_v37.fasta \
+-R /data/GCDA_2025_2/1_sequencing/reference/human_g1k_v37.fasta \
 --variant sample01_20.g.vcf \
 --variant sample02_20.g.vcf \
 --variant sample03_20.g.vcf \
@@ -415,7 +415,7 @@ gatk CombineGVCFs \
 
 ```
 gatk --java-options "-Xmx4g" GenotypeGVCFs \
--R ~/1_sequencing/reference/human_g1k_v37.fasta \
+-R /data/GCDA_2025_2/1_sequencing/reference//human_g1k_v37.fasta \
 -V sample_all.g.vcf.gz \
 -O sample_all.vcf
 ```
