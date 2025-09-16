@@ -64,7 +64,7 @@ mamba install gatk4 -c bioconda
 # Download Picard (Find Latest Release: https://github.com/broadinstitute/picard/releases/latest)
 ## cd ~/1_sequencing/utils
 ## wget https://github.com/broadinstitute/picard/releases/download/3.0.0/picard.jar
-mamba install bioconda::bcftools
+
 ```
 
 ### 2. Preparing data
@@ -196,7 +196,7 @@ SM=${SID}
 ```
 
 #### Add read group information in `BAM` file
-
+read group is a set of sequences (in one or more fastq files) having a common set of metadata. This metadata generally includes patient/sample ID, library ID (the library is the preparation of the patient/sample DNA.
 We can add read groups in `BAM` file by the following command:
 
 ```
@@ -214,6 +214,8 @@ RGSM=20
 #### Mark adapter sequences
 
 Using `MarkIlluminaAdapters`, we can mark adapter sequences.
+
+Adapter sequences are short, synthetic DNA segments attached to the ends of fragmented DNA or RNA libraries for next-generation sequencing (NGS)
 
 ```
 java17 -Xmx8G -jar ~/1_sequencing/utils/picard.jar MarkIlluminaAdapters \
@@ -273,7 +275,7 @@ The information of some columns are as follows:
 * Column 11: ASCII representation of phred-scale base quality
 
 #### Add information to `BAM` file using `MergeBamAlignment`
-
+the alignment information from the mapped file (bwa) + the metadata  → one standardized, analysis-ready BAM.
 ```
 java17 -Xmx10G -jar ~/1_sequencing/utils/picard.jar MergeBamAlignment \
 R=~/1_sequencing/reference/human_g1k_v37.fasta \
@@ -309,7 +311,7 @@ SO=coordinate
 ```
 
 #### Create Recalibration Table using `BaseRecalibrator`
-
+[BQSR Explaination](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR)
 ```
 gatk --java-options '-Xmx10g' BaseRecalibrator \
 -I sorted_${SID}.bam \
@@ -409,7 +411,7 @@ gatk CombineGVCFs \
 -O sample_all.g.vcf.gz
 ```
 
-### 7. Converting `GVCF` to `VCF`
+### 7. Converting `GVCF` to `VCF` (Genotyping)
 
 ```
 gatk --java-options "-Xmx4g" GenotypeGVCFs \
