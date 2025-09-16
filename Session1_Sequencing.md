@@ -278,7 +278,7 @@ The information of some columns are as follows:
 the alignment information from the mapped file (bwa) + the metadata  → one standardized, analysis-ready BAM.
 ```
 java17 -Xmx10G -jar ~/1_sequencing/utils/picard.jar MergeBamAlignment \
-R=~/1_sequencing/reference/human_g1k_v37.fasta \
+R=/data/GCDA_2025_2/1_sequencing/reference//human_g1k_v37.fasta \
 UNMAPPED=add_read_groups_${SID}.bam \
 ALIGNED=aligned_${SID}.sam \
 O=preprocessed_${SID}.bam \
