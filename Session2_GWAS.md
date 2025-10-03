@@ -1,17 +1,18 @@
-# Practice Session #2: Genome-wide Association Studies (GWAS) (April 3, 2025)
+# Practice Session #2: Genome-wide Association Studies (GWAS) (October 3, 2025)
 
 In this session, we will learn how to conduct the genome-wide association analysis using SAIGE. \
 (References: [Paper](https://www.nature.com/articles/s41588-018-0184-y), [Github](https://github.com/saigegit/SAIGE), [Documentation](https://saigegit.github.io/SAIGE-doc/)) \
-This document was created on April 3, 2025 and the following contents were tested on the Lee Lab cluster (Ubuntu 24.04.1 LTS).
+This document was created on October 3, 2025 and the following contents were tested on the Lee Lab cluster (Ubuntu 18.04.4 LTS).
 
-### 1. Setting up the environment
+## 1. Setting up the environment
 
-We will use [Docker](https://www.docker.com/) on the Lee Lab cluster (`leelabsg15` node). \
-It is already created on the GSDS cluster, but you can create the environment on your local machine with the following command:
+We will use [Docker](https://www.docker.com/) on the Lee Lab cluster (`leelabsg11` node). \
+You can find the latest version of SAIGE docker image on [Docker Hub](https://hub.docker.com/). \
+It is already created on the cluster, but you can create the environment on your local machine with the following command:
 
 ```
 # Pull SAIGE docker image
-sudo docker pull wzhou88/saige:1.4.4
+sudo docker pull wzhou88/saige:1.5.0.2
 
 # Give previlege to use docker without sudo
 sudo usermod -aG docker $USER
@@ -20,17 +21,19 @@ sudo usermod -aG docker $USER
 You can test if it works:
 
 ```
-docker run --rm -it -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS wzhou88/saige:1.4.4 /bin/bash
+docker run --rm -it \
+    -v /data/home/gcda_XXX/2_GWAS:/data/home/gcda_XXX/2_GWAS \
+    wzhou88/saige:1.5.0.2 /bin/bash
 ```
 
-### 2. Preparing data
+## 2. Preparing data
 
 We need (individual-level) genotype and phenotype files to conduct GWAS. \
 However, access to these files is strictly restricted.
 
 Let's take a quick look at what the real data (UK Biobank) looks like.
 
-#### Phenotype file
+### Phenotype file
 
 The phenotype file of UK Biobank looks like the following:
 
@@ -52,14 +55,14 @@ You can find the information of each phenotype column in [UK Biobank showcase](h
 * Field ID 46 means 'hand grip strength (left)'
 * Field ID 47 means 'hand grip strength (right)'
 
-#### Genotype file
+### Genotype file
 
-##### Variant Call Format (`vcf`)
+#### Variant Call Format (`vcf`)
 
 It contains meta-information lines, a header line, and then data lines each containing information about a position in the genome.
 
 
-##### PLINK binary (`bed`, `bim`, `fam`)
+#### PLINK binary (`bed`, `bim`, `fam`)
 
 PLINK binary files are the binary version of PLINK files (`ped`, `map`). \
 PLINK binary genotype data consists of 3 files:
@@ -98,7 +101,15 @@ PLINK binary genotype data consists of 3 files:
 1a10	1a10	0	0	0	-9
 ```
 
-`bed` file contains the genotype information (in binary format). \
+`bed` file contains the genotype information (in binary format).
+
+|     | 1a1 | 1a2 | 1a3 | 1a4 | ... |
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| rs1 | 0   | 0   | 0   | 2   | ... |
+| rs2 | 1   | 0   | 1   | 0   | ... |
+| rs3 | 0   | 1   | 0   | 0   | ... |
+| ... | ... | ... | ... | ... | ... |
+
 We cannot easily check the genotype information, but we can see the bitwise 
 
 ```
@@ -117,7 +128,7 @@ We cannot easily check the genotype information, but we can see the bitwise
 You can find more details on [PLINK website](https://zzz.bwh.harvard.edu/plink/binary.shtml).
 
 
-#### Example Data
+### Example Data
 
 We will use `pheno_example.txt` as a phenotype file.
 
@@ -135,62 +146,62 @@ IID	x1	                x2	y_binary  y_quantitative
 ```
 
 
-### 3. Run GWAS using SAIGE
+## 3. Run GWAS using SAIGE
 
-#### What is SAIGE?
+### What is SAIGE?
 
 * Mixed effect model-based method
 * Score test to compute test statistics
 * Several techniques for fast computation
 For detailed explanation, please refer the [Notion page](https://admitted-guan-7d5.notion.site/SAIGE-10ea25444f7a802ea917d4aad44f2ce0).
 
-#### Why SAIGE?
+### Why SAIGE?
 
 * Can account for related individuals
 * Fast computation
 * Prevent type I error inflation in case of case-control imbalance
 
-#### Process
+### Process
 
-##### Step 0. (Optional) Create sparse GRM
+#### Step 0. (Optional) Create sparse GRM
 
 This sparse GRM only needs to be created once for each data set, e.g. a biobank, and can be used for all different phenotypes as long as all tested samples are in the sparse GRM.
 
 ```
-docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
-        wzhou88/saige:1.4.4 createSparseGRM.R \
-        --plinkFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
+docker run -v /data/home/gcda_XXX/2_GWAS:/data/home/gcda_XXX/2_GWAS \
+        wzhou88/saige:1.5.0.2 createSparseGRM.R \
+        --plinkFile=/data/home/gcda_XXX/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
         --nThreads=4 \
-        --outputPrefix=/data/home/gcda_XXX/GCDA/2_GWAS/sparseGRM \
+        --outputPrefix=/data/home/gcda_XXX/2_GWAS/sparseGRM \
         --numRandomMarkerforSparseKin=2000 \
         --relatednessCutoff=0.125
 ```
 
-##### Step 1. Fitting the null (logistic/linear) mixed model
+#### Step 1. Fitting the null (logistic/linear) mixed model
 
-###### Binary trait example
+##### Binary trait example
 
 ```
-docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
-        wzhou88/saige:1.4.4 step1_fitNULLGLMM.R \
-        --plinkFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
-        --phenoFile=/data/home/gcda_XXX/GCDA/2_GWAS/phenotype/pheno_example.txt \
+docker run -v /data/home/gcda_XXX/2_GWAS:/data/home/gcda_XXX/2_GWAS \
+        wzhou88/saige:1.5.0.2 step1_fitNULLGLMM.R \
+        --plinkFile=/data/home/gcda_XXX/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
+        --phenoFile=/data/home/gcda_XXX/2_GWAS/phenotype/pheno_example.txt \
         --phenoCol=y_binary \
         --covarColList=x1,x2 \
         --sampleIDColinphenoFile=IID \
         --traitType=binary \
-        --outputPrefix=/data/home/gcda_XXX/GCDA/2_GWAS/example_binary \
+        --outputPrefix=/data/home/gcda_XXX/2_GWAS/example_binary \
         --nThreads=8 \
         --IsOverwriteVarianceRatioFile=TRUE
 ```
 
-###### Quantitative trait example
+##### Quantitative trait example
 
 ```
-docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
-        wzhou88/saige:1.4.4 step1_fitNULLGLMM.R \
-        --plinkFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
-        --phenoFile=/data/home/gcda_XXX/GCDA/2_GWAS/phenotype/pheno_example.txt \
+docker run -v /data/home/gcda_XXX/2_GWAS:/data/home/gcda_XXX/2_GWAS \
+        wzhou88/saige:1.5.0.2 step1_fitNULLGLMM.R \
+        --plinkFile=/data/home/gcda_XXX/2_GWAS/genotype/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \
+        --phenoFile=/data/home/gcda_XXX/2_GWAS/phenotype/pheno_example.txt \
         --phenoCol=y_quantitative \
         --invNormalize=TRUE \
         --covarColList=x1,x2 \
@@ -203,26 +214,60 @@ docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
 
 You can find more example usages in [SAIGE Documentation page](https://saigegit.github.io/SAIGE-doc/docs/single_example.html).
 
-##### Step 2. Performing single-variant association tests
+#### Step 2. Performing single-variant association tests (SAIGE)
 
-###### Quantitative trait example
+##### Quantitative trait example
 
 ```
-docker run -v /data/home/gcda_XXX/GCDA/2_GWAS:/data/home/gcda_XXX/GCDA/2_GWAS \
-        wzhou88/saige:1.4.4 step2_SPAtests.R \
-        --vcfFile=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/genotype_100markers.vcf.gz \
-        --vcfFileIndex=/data/home/gcda_XXX/GCDA/2_GWAS/genotype/genotype_100markers.vcf.gz.csi \
+docker run -v /data/home/gcda_XXX/2_GWAS:/data/home/gcda_XXX/2_GWAS \
+        wzhou88/saige:1.5.0.2 step2_SPAtests.R \
+        --vcfFile=/data/home/gcda_XXX/2_GWAS/genotype/genotype_100markers.vcf.gz \
+        --vcfFileIndex=/data/home/gcda_XXX/2_GWAS/genotype/genotype_100markers.vcf.gz.csi \
         --vcfField=GT \
         --chrom=1 \
         --minMAF=0 \
         --minMAC=10 \
-        --GMMATmodelFile=/data/home/gcda_XXX/GCDA/2_GWAS/example_quantitative.rda \
-        --varianceRatioFile=/data/home/gcda_XXX/GCDA/2_GWAS/example_quantitative.varianceRatio.txt \
-        --SAIGEOutputFile=/data/home/gcda_XXX/GCDA/2_GWAS/step2_quant.txt
+        --GMMATmodelFile=/data/home/gcda_XXX/2_GWAS/example_quantitative.rda \
+        --varianceRatioFile=/data/home/gcda_XXX/2_GWAS/example_quantitative.varianceRatio.txt \
+        --SAIGEOutputFile=/data/home/gcda_XXX/2_GWAS/step2_quant.txt
 ```
 
+#### Step 2. Performing gene-level association tests (SAIGE-GENE+)
 
-### 4. Drawing plots
+Gene-based test requires a group file, which defines the annotations for variants within the region.
+
+```
+GENE1 var 1:1:A:C 1:2:A:C 1:3:A:C 1:4:A:C 1:5:A:C 1:6:A:C 1:7:A:C 1:8:A:C 1:9:A:C 1:10:A:C 1:11:A:C 1:12:A:C 1:13:A:C 1:14:A:C 1:15:A:C 1:16:A:C 1:17:A:C 1:18:A:C 1:19:A:C 1:20:A:C 1:21:A:C 1:22:A:C 1:23:A:C 1:24:A:C 1:25:A:C 1:26:A:C 1:27:A:C 1:28:A:C 1:29:A:C 1:30:A:C 1:31:A:C 1:32:A:C 1:33:A:C 1:34:A:C 1:35:A:C 1:36:A:C 1:37:A:C 1:38:A:C 1:39:A:C 1:40:A:C 1:41:A:C 1:42:A:C 1:43:A:C 1:44:A:C 1:45:A:C 1:46:A:C 1:47:A:C 1:48:A:C 1:49:A:C 1:50:A:C
+GENE1 anno lof lof lof lof lof lof lof lof lof lof missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof
+GENE3 var 1:51:A:C
+GENE3 anno intergenic
+GENE2 var 1:51:A:C 1:52:A:C 1:53:A:C 1:54:A:C 1:55:A:C 1:56:A:C 1:57:A:C 1:58:A:C 1:59:A:C 1:60:A:C 1:61:A:C 1:62:A:C 1:63:A:C 1:64:A:C 1:65:A:C 1:66:A:C 1:67:A:C 1:68:A:C 1:69:A:C 1:70:A:C 1:71:A:C 1:72:A:C 1:73:A:C 1:74:A:C 1:75:A:C 1:76:A:C 1:77:A:C 1:78:A:C 1:79:A:C 1:80:A:C 1:81:A:C 1:82:A:C 1:83:A:C 1:84:A:C 1:85:A:C 1:86:A:C 1:87:A:C 1:88:A:C 1:89:A:C 1:90:A:C 1:91:A:C 1:92:A:C 1:93:A:C 1:94:A:C 1:95:A:C 1:96:A:C 1:97:A:C 1:98:A:C 1:99:A:C 1:100:A:C
+GENE2 anno missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense missense lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof lof
+```
+
+##### Quantitative trait example
+
+```
+docker run -v /data/home/gcda_XXX/2_GWAS:/data/home/gcda_XXX/2_GWAS \
+        wzhou88/saige:1.5.0.2 step2_SPAtests.R \
+        --bgenFile=/data/home/gcda_XXX/2_GWAS/genotype/genotype_100markers.bgen    \
+        --bgenFileIndex=/data/home/gcda_XXX/2_GWAS/genotype/genotype_100markers.bgen.bgi \
+        --SAIGEOutputFile=/data/home/gcda_XXX/2_GWAS/step2_gene_quant.txt \
+        --chrom=1 \
+        --AlleleOrder=ref-first \
+        --minMAF=0 \
+        --minMAC=0.5 \
+        --LOCO=FALSE \
+        --sampleFile=/data/home/gcda_XXX/2_GWAS/genotype/samplelist.txt \
+        --GMMATmodelFile=/data/home/gcda_XXX/2_GWAS/example_quantitative.rda \
+        --varianceRatioFile=/data/home/gcda_XXX/2_GWAS/example_quantitative.varianceRatio.txt \
+        --groupFile=/data/home/gcda_XXX/2_GWAS/genotype/group_new_chrposa1a2.txt    \
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01 \
+        --is_fastTest=TRUE
+```
+
+## 4. Drawing plots
 
 Using `qqman` package in R, we can draw manhattan plot and Q-Q plot with the GWAS result (summary statistics). ([Documentation](https://cran.r-project.org/web/packages/qqman/qqman.pdf))
 
