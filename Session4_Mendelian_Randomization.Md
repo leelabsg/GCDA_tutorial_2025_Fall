@@ -1,4 +1,4 @@
-# Practice Session #4: Two-sample Mandelian Randomization (May 8, 2025)
+# Practice Session #4: Two-sample Mandelian Randomization (Oct 28, 2025)
 In this session, we will learn how to perform two Sample MR with publicly available GWAS datasets. \
 The overall process in this session is mainly based on the [TwoSampleMR in R vignette](https://mrcieu.github.io/TwoSampleMR/).
 
@@ -6,16 +6,16 @@ The overall process in this session is mainly based on the [TwoSampleMR in R vig
 
 ### 0. Installing twoSampleMR in R using Conda 
 To avoid conflicts in dependecies, we will create new environment for two sample MR (twoMR) in this session.
-First, lets install R and devtools in new conda environment (Already installed as twoMR under leelab server)
+First, lets install R and devtools in new conda environment:
 ```
 conda create -n twoMR r-base r-essentials r-devtools r-remotes r-gmp -c conda-forge -c R 
 conda activate twoMR ; R --no-save
 ```
-TwoSampleMR pacakge is installed from github 
+Install TwoSampleMR pacakge from github: 
 ```
 remotes::install_github("MRCIEU/TwoSampleMR")
 ```
-Next, Load the necessary packages
+Load the necessary packages:
 ```
 library(TwoSampleMR)
 ```
@@ -36,8 +36,10 @@ The workflow for performing MR is as follows:
 
 
 ### 2. IEU GWAS database
-The [IEU](https://gwas.mrcieu.ac.uk/) GWAS database (IGD) contains complete GWAS summary statistics from a large number of studies. You can browse them through the website. \
-<img width="746" alt="image" src="https://user-images.githubusercontent.com/22064612/235642892-b283511b-6e2e-410a-9f7b-3c0611b325f7.png">
+The [IEU Open GWAS project](https://opengwas.io/datasets/) contains complete GWAS summary statistics from a large number of studies. You can browse them through the website. 
+
+To use the API provided by IEU, you must log in with your school account, apply for a JSON Web Token (JWT), and then register the generated token. \
+All necessary steps for this process can be found in the [API Tutorial](https://api.opengwas.io/).
 
 From the package, available_outcomes() will list up outcomes obtainable from IEU.
 ```
@@ -58,28 +60,11 @@ bmi_exp_dat <- extract_instruments(outcomes = 'ieu-a-2')
 head(bmi_exp_dat)
 ```
 
-The output from this function is a new data frame with standardized column names:
-
-- SNP 
-- exposure 
-- beta.exposure 
-- se.exposure 
-- effect_allele.exposure 
-- other_allele.exposure 
-- eaf.exposure 
-- mr_keep.exposure 
-- pval.exposure 
-- pval_origin.exposure 
-- id.exposure 
-- data_source.exposure 
-- units.exposure 
-- gene.exposure 
-- samplesize.exposure 
 
 (Optional) You can import your own GWAS summary for exposure data. \
 Example:
 ```
-bmi_file <- system.file("extdata", "bmi_exp.txt", package = "TwoSampleMR")
+bmi_file <- system.file("extdata/bmi.csv", package = "TwoSampleMR")
 
 bmi_exp_dat2 <- read_exposure_data(
     filename = bmi_file,
@@ -95,10 +80,11 @@ bmi_exp_dat2 <- read_exposure_data(
     gene_col = "Gene",
     samplesize_col = "n"
 )
+
+head(bmi_exp_dat2)
 ```
-For standard two sample MR, it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS summary of your own or other studies, it is necessary to perform **clumping** to ensure independence between instrumental variables. \
-\
-*Additional note after 5/8 class* \
+For standard two sample MR, it is important to ensure that the **instruments for the exposure are independent**. If you are going to extract exposure variables from GWAS summary of your own or other studies, it is necessary to perform **clumping** to ensure independence between instrumental variables. 
+
 For LD clumpig, you can use [clump_data() function](https://mrcieu.github.io/TwoSampleMR/reference/clump_data.html) provided by the "TwoSampleMR" package. 
 
 ### 4. Outcome Data Example
@@ -114,7 +100,7 @@ head(chd_out_dat)
 ```
 chd_out_dat2 <- read_outcome_data(
     snps = bmi_exp_dat$SNP,
-    filename = "/data/GCDA/4_MR/26343387-GCST003116-EFO_0000378.h.tsv",
+    filename = "/data/GCDA_2025_2/4_MR/26343387-GCST003116-EFO_0000378-build37.f.tsv",
     sep = "\t",
     snp_col = "variant_id",
     beta_col = "beta",
@@ -131,7 +117,6 @@ head(chd_out_dat2)
 
 ### 5. Harmonizing Data
 Harmonizing data step is required because there are mismatches between alleles in exposure and outcome. Recent GWASs typically present the effects of a SNP in reference to the allele on the forward strand but not necessarily.
-![image](https://user-images.githubusercontent.com/22064612/235645818-0c25fa91-7ba8-4dcf-9066-406e2db0eb9e.png)
 
 ```
 dat <- harmonise_data(
@@ -152,7 +137,7 @@ Before we perform MR, lets find out which method is available in the package
 ```
 mr_method_list()
 ```
-Let's try MR with Egger, two sample maximum likelihood,simple median, and IVW. You can add list of methods or methods set by default.
+Let's try MR with Egger, weighted median, and IVW. You can add list of methods or methods set by default.
 
 ```
 res <- mr(dat, method_list = c("mr_egger_regression","mr_weighted_median","mr_ivw"))
@@ -177,7 +162,7 @@ ggplot2::ggsave(p1[[1]], file = <FILE_PATH>, width = 7, height = 7)
 ```
 In case that you want to download the plot to local computer, you can use the script below on your local terminal.
 ```
-scp -P 22555 <USER_ID>@147.47.200.131:<FROM_FILE_PATH> <TO_FILE_PATH>
+scp -P 22555 -J <USER_ID>@147.47.200.131 <USER_ID>@leelabsg11:<FROM_FILE_PATH> <TO_FILE_PATH>
 ```
 ![filename](https://user-images.githubusercontent.com/22064612/235652335-b57f0381-b820-47e0-a07f-da09564f9c0b.png)
 
@@ -202,7 +187,6 @@ res_loo <- mr_leaveoneout(dat)
 p4 <- mr_leaveoneout_plot(res_loo)
 ggplot2::ggsave(p4[[1]], file = <FILE_PATH>, width = 7, height = 7)
 ```
-
 
 
 
