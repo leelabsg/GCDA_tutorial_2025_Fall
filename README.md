@@ -22,7 +22,7 @@ Processes and codes for various practice sessions will be shared here. Please no
 **TA:** Bo-Eun Ahn ([email](mailto:ahnbo@snu.ac.kr))
 
 ### Session 5 - EHR
-**Date:** TBA   
+**Date:** October 28, 2005   
 **TA:** Junhyeong Lee ([email](mailto:lrainsoul@snu.ac.kr))
 
 ### Session 6 - Medical Image Analysis  (HW)
