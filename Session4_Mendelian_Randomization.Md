@@ -6,7 +6,7 @@ The overall process in this session is mainly based on the [TwoSampleMR in R vig
 
 ### 0. Installing twoSampleMR in R using Conda 
 To avoid conflicts in dependecies, we will create new environment for two sample MR (twoMR) in this session.
-First, lets install R and devtools in new conda environment:
+First, let's install R and devtools in new conda environment:
 ```
 conda create -n twoMR r-base r-essentials r-devtools r-remotes r-gmp -c conda-forge -c R 
 conda activate twoMR ; R --no-save
