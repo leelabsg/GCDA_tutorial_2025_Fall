@@ -38,7 +38,7 @@ The workflow for performing MR is as follows:
 ### 2. IEU GWAS database
 The [IEU Open GWAS project](https://opengwas.io/datasets/) contains complete GWAS summary statistics from a large number of studies. You can browse them through the website. 
 
-To use the API provided by IEU, you must log in with your school account, apply for a JSON Web Token (JWT), and then register the generated token. \
+To use the API provided by IEU, you must log in with your school email, apply for a JSON Web Token (JWT), and then register the generated token. \
 All necessary steps for this process can be found in the [API Tutorial](https://api.opengwas.io/).
 
 From the package, available_outcomes() will list up outcomes obtainable from IEU.
