@@ -40,7 +40,7 @@ The [IEU Open GWAS project](https://opengwas.io/datasets/) contains complete GWA
 
 To use the API provided by IEU, you must log in with your school email, apply for a JSON Web Token (JWT), and then register the generated token. \
 All necessary steps for this process can be found in the [API Tutorial](https://api.opengwas.io/).
-(also see [authentication](https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication) how to register JWT in R)
+(also see [authentication](https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication) for how to register JWT in R)
 
 From the package, available_outcomes() will list up outcomes obtainable from IEU.
 ```
