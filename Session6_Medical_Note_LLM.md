@@ -2,8 +2,8 @@
 
 In this session, we will learn how to perform **clinical data analysis using the OpenAI API**.  
 
-You can find **all Session 6 materials** in the folder below:
-    [Session6 Folder](https://github.com/leelabsg/GCDA_tutorial_2025_Fall/tree/main/Session6)
+You can find **all Session 6 materials** in the folder below:  
+➡️ [Session6 Folder](https://github.com/leelabsg/GCDA_tutorial_2025_Fall/tree/main/Session6)
 
 ## Dataset Description
 
