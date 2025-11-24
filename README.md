@@ -25,7 +25,7 @@ Processes and codes for various practice sessions will be shared here. Please no
 **Date:** November 18, 2025  
 **TA:** Junhyeong Lee ([email](mailto:lrainsoul@snu.ac.kr))
 
-### [Session 6 - Medical Note and LLM](Session6_Medical_Note_LLM.Md)
+### [Session 6 - Medical Note and LLM](Session6_Medical_Note_LLM.md)
 **Date:** November 25, 2025   
 **TA:** Soungmun Kim ([email](mailto:soungmun@snu.ac.kr))
 
