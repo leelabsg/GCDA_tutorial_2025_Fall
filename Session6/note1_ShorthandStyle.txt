@@ -1,0 +1,19 @@
+#. T2DM  
+   Dx since 2010, recent HbA1c 9.1  
+   MTF → 설사, 복부팽만, 식욕저하, 무기력감  
+   Lactic acidosis (Lac 3.9) 의심 → 약 중단, 수액 치료  
+   MTF-induced lactic acidosis 의심 → 약 중단 후 회복, basal insulin 예정
+
+   Levemir 22 --- 10 units, 저녁 인슐린 잘 안 맞음
+
+
+#. HTN  
+   BP on admission 92/58
+   Losartan 유지 
+
+#. CKD stage 3  
+   Baseline Cr 1.6 → 입원 시 Cr 2.1  
+   수액 이후 신기능 호전, 투석 필요 없음  
+
+#. Dyslipidemia  
+   Atorvastatin  

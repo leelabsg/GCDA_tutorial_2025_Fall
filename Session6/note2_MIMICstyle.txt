@@ -1,0 +1,93 @@
+History of Present Illness:  
+78-year-old female with a history of type 2 diabetes, hypertension, and CKD stage 3 who presented with generalized weakness, poor oral intake, and nausea.
+
+Two weeks prior to admission, she was started on metformin after a primary care visit revealed HbA1c of 9.1. Since initiation, the patient has developed persistent loose stools and intermittent abdominal cramping. No reported fever or vomiting. Her family noted a gradual decline in appetite and energy over the past week.
+
+On arrival, vital signs showed hypotension (BP 88/56) and tachycardia (HR 102). Laboratory evaluation revealed elevated creatinine (2.1 from baseline 1.6) and lactic acid of 3.9. Impression was possible metformin-associated lactic acidosis. Metformin was held, and IV fluids were started. Endocrinology was consulted to guide alternative glycemic management. The patient is being monitored for clinical improvement.
+
+---
+
+Past Medical History:  
+1. Type 2 Diabetes Mellitus (HbA1c 9.1)  
+2. Chronic Kidney Disease, Stage 3 (baseline Cr ~1.6)  
+3. Hypertension  
+
+---
+
+Social History:  
+- Lives in assisted living  
+- Non-smoker, no alcohol use  
+- No recent travel or infectious exposures  
+
+Family History:  
+- Mother: type 2 diabetes  
+- Father: unknown  
+
+---
+
+Physical Exam on Admission:  
+Vitals: T 97.4, BP 88/56, HR 102, RR 20, SpO2 95% on RA  
+General: Alert but fatigued; oriented  
+HEENT: Dry mucous membranes; no scleral icterus  
+CV: Tachycardic but regular; no murmurs  
+Lungs: Clear to auscultation  
+Abdomen: Soft; mild lower abdominal tenderness  
+Extremities: No edema  
+Neuro: A&O x3, no focal deficits  
+Skin: No rash  
+
+---
+
+Pertinent Labs:  
+WBC 10.8, Hgb 11.2, Plt 243  
+Na 138, K 4.0, Cl 100, HCO3 15  
+BUN 38, Cr 2.1  
+Glucose 78  
+Lactate 3.9  
+ABG: pH 7.31, AG 19  
+UA: +glucose, no WBCs or nitrites  
+
+---
+
+Microbiology:  
+Urine culture: no growth  
+Blood culture: pending  
+
+Imaging:  
+CXR: No infiltrates or consolidation  
+Renal US: Normal echotexture, no hydronephrosis  
+
+---
+
+Hospital Course:  
+
+# Metformin-Associated Lactic Acidosis:  
+Patient presented with GI symptoms, hypotension, and elevated lactate in the setting of recent metformin initiation and CKD. Suspected MALA. Metformin was held. Initiated IV hydration and bicarbonate support. Mental status and vitals improved over 48 hours.
+
+# T2DM:  
+All antihyperglycemics were held initially. Glucose remained stable. Basal insulin will be initiated. Endocrinology is following.
+
+# CKD:  
+AKI on CKD with Cr 2.1. Improved with fluids. No indication for dialysis. Electrolytes monitored.
+
+# Hypotension:  
+Likely secondary to dehydration and acidosis. Responded to volume repletion.
+
+---
+
+Discharge Medications:  
+1. Basal insulin (Lantus) 6 units SC QHS  
+2. Losartan 50 mg PO daily  
+3. Atorvastatin 20 mg PO daily  
+4. Calcium carbonate 500 mg PO BID  
+5. Acetaminophen 650 mg PO TID PRN  
+6. Pantoprazole 40 mg PO daily  
+
+---
+
+Discharge Plan:  
+- Return to assisted living facility  
+- Strict avoidance of metformin in future  
+- Glucose monitoring BID with insulin titration  
+- Follow-up with nephrology and endocrinology in 1–2 weeks  
+- Code status: Full Code  
