@@ -1,0 +1,45 @@
+{
+    "diffusion_unet_inference": {
+        "bottom_region_index": [
+            0,
+            0,
+            1,
+            0
+        ],
+        "dim": [
+            256,
+            256,
+            128
+        ],
+        "modality": 1,
+        "num_inference_steps": 100,
+        "random_seed": 0,
+        "spacing": [
+            0.9375,
+            0.9375,
+            1.2109375
+        ],
+        "top_region_index": [
+            0,
+            1,
+            0,
+            0
+        ],
+        "stochastic_scale": 0.0
+    },
+    "diffusion_unet_train": {
+        "batch_size": 8,
+        "cache_rate": 0.1,
+        "checkpointing_steps": 1000,
+        "gradient_accumulation_steps": 1,
+        "lr": 5e-6,
+        "max_train_steps": 200000,
+        "num_valid": 1000,
+        "report_to": true,
+        "seed": 42,
+        "val_batch_size": 4,
+        "validation_steps": 5000,
+        "loss_type": "l2",
+        "pretrained_steps": 0
+    }
+}

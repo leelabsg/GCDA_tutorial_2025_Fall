@@ -1,0 +1,12 @@
+{
+    "data_base_dir": "",
+    "embedding_base_dir": "/leelabsg/data/ex_MAISI/maisi_brats/embeddings",
+    "existing_ckpt_filepath": null,
+    "json_data_list": "/leelabsg/data/ex_MAISI/maisi_brats/train_files.json",
+    "model_dir": "/leelabsg/data/ex_MAISI/maisi_brats/models",
+    "model_filename": "diff_unet_ckpt.pt",
+    "output_dir": "/leelabsg/data/ex_MAISI/maisi_brats/predictions",
+    "output_prefix": "unet_3d",
+    "trained_autoencoder_path": "/shared/s1/lab06/wonyoung/maisi/weights/brats/brats_vae_stage2/model.pt",
+    "val_json_data_list": "/leelabsg/data/ex_MAISI/maisi_brats/valid_files.json"
+}

@@ -1,0 +1,38 @@
+{
+    "data_option":{
+        "random_aug": true,
+        "spacing_type": "rand_zoom",
+        "spacing": null,
+        "select_channel": 0
+    },
+    "autoencoder_train": {
+        "batch_size": 1,
+        "patch_size": [144, 144, 144],
+        "val_batch_size": 1,
+        "val_patch_size": null,
+        "val_sliding_window_patch_size": [144, 144, 144],
+        "lr": 1e-5,
+        "perceptual_weight": 0.3,
+        "kl_weight": 1e-7,
+        "adv_weight": 0.1,
+        "recon_loss": "l1",
+        "cache": 0.1,
+        "amp": true
+    },
+    "custom_config": {
+        "weight_dtype": "fp16",
+        "seed": 42,
+        "report_to": true,
+        "output_dir": "/shared/s1/lab06/wonyoung/maisi/results",
+        "train_label_dir": "/leelabsg/data/BraTS25/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/train",
+        "valid_label_dir": "/leelabsg/data/BraTS25/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/valid",
+        "max_train_steps": 125000,
+        "num_valid": 1000,
+        "checkpointing_steps": 1000,
+        "validation_steps": 10000,
+        "early_stop_patience": 100000000,
+        "early_stop_min_delta": 0.01,
+        "gradient_accumulation_steps": 4,
+        "pretrained_steps": 50000
+    }
+}
