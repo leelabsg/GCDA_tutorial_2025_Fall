@@ -195,8 +195,10 @@ def main():
         if args.report_to:
             wandb.init(project="MAISI_UNET_BraTS", config=args, name=args.run_name)
         Path(args.model_dir).mkdir(parents=True, exist_ok=True)
-
+    
+    # https://github.com/Project-MONAI/MONAI/blob/e267705385d00ef0071cf51b087345d720af9102/monai/apps/generation/maisi/networks/diffusion_model_unet_maisi.py#L53
     unet = define_instance(args, "diffusion_unet_def").to(device)
+    # https://github.com/Project-MONAI/MONAI/blob/e267705385d00ef0071cf51b087345d720af9102/monai/networks/schedulers/rectified_flow.py#L80
     noise_scheduler = define_instance(args, "noise_scheduler")
     include_body_region = unet.include_top_region_index_input
     include_modality = unet.num_class_embeds is not None
@@ -301,7 +303,7 @@ def main():
     if rank == 0:
         logger.info(f"### start_epoch: {start_epoch}")
         param_counts = count_parameters(unet)
-        logger.info(f"### UNET's Trainable parameters: {param_counts['trainable']:,}")
+        logger.info(f"### UNET's Trainable parameters: {param_counts['trainable']:,}") # 182,369,412
 
     def infinite_loader(loader, sampler, start_epoch=0):
         epoch = start_epoch
