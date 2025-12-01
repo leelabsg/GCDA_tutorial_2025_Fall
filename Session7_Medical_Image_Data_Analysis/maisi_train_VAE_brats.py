@@ -258,7 +258,9 @@ def main():
         for i, t in enumerate(val_transform.transform_dict["mri"].transforms):
             print(f"[{i}] {t}")
 
+    # https://github.com/Project-MONAI/MONAI/blob/e267705385d00ef0071cf51b087345d720af9102/monai/networks/nets/autoencoderkl.py#L472
     autoencoder = define_instance(args, "autoencoder_def").to(device)
+    # https://github.com/Project-MONAI/MONAI/blob/e267705385d00ef0071cf51b087345d720af9102/monai/networks/nets/patchgan_discriminator.py#L116
     discriminator = PatchDiscriminator(
         spatial_dims=args.spatial_dims,
         num_layers_d=3,
@@ -306,9 +308,9 @@ def main():
     if rank == 0:
         print("### start_epoch:", start_epoch)
         param_counts = count_parameters(autoencoder.module)
-        print(f"### autoencoder's Trainable parameters: {param_counts['trainable']:,}")
+        print(f"### autoencoder's Trainable parameters: {param_counts['trainable']:,}") # 20,944,897
         param_counts = count_parameters(discriminator.module)
-        print(f"### discriminator's Trainable parameters: {param_counts['trainable']:,}")
+        print(f"### discriminator's Trainable parameters: {param_counts['trainable']:,}") # 2,770,977
 
     def infinite_loader(loader, sampler, start_epoch=0):
         epoch = start_epoch
@@ -344,7 +346,7 @@ def main():
         with autocast(device_type="cuda", dtype=torch.float16, enabled=args.amp):
             losses = {
                 "recons_loss": intensity_loss(reconstruction, images), # voxel 직접 비교
-                "kl_loss": kl_loss, # 압축된 데이터가 정규분포를 따르도록 강제 (latent 다듬는 역할 -> loss 적절하게 유지되어야 함)
+                "kl_loss": kl_loss, # 압축된 데이터가 정규분포를 따르도록 강제 (latent 다듬는 역할 -> loss 적절하게 유지되어야 함; 너무 크면 생성 fail, 너무 작으면 생성 다 똑같아짐)
                 "p_loss": loss_perceptual(reconstruction.float(), images.float()), # 시각적 차이를 반영
             }
             # Gen이 Disc. 얼마나 잘 속이는가?
