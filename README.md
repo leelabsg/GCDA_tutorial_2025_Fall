@@ -21,7 +21,7 @@ Processes and codes for various practice sessions will be shared here. Please no
 **Date:** October 28, 2025    
 **TA:** Bo-Eun Ahn ([email](mailto:ahnbo@snu.ac.kr))
 
-### [Session 5 - Prediction using EHR (RNN)]
+### [Session 5 - Prediction using EHR (RNN)] (HW)
 **Date:** November 18, 2025  
 **TA:** Junhyeong Lee ([email](mailto:lrainsoul@snu.ac.kr))
 
@@ -29,7 +29,7 @@ Processes and codes for various practice sessions will be shared here. Please no
 **Date:** November 25, 2025   
 **TA:** Soungmun Kim ([email](mailto:soungmun@snu.ac.kr))
 
-### [Session 7 - Medical Image Data Analysis (CNN)]  (HW)
+### [Session 7 - Medical Image Data Analysis (CNN)](Session7_Medical_Image_Data_Analysis.md)
 **Date:** December 2, 2025   
 **TA:** Wonyoung Jang ([email](mailto:jwy4888@snu.ac.kr))
 
